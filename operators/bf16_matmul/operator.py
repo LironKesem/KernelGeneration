@@ -18,7 +18,7 @@ from tritonbench.utils.triton_op import (
     register_metric,
 )
 from .kernels import matmul_kernel
-from .llm_kernel import call
+from .llm_kernel import call_64_128_32, call_256_256_32
 
 class Operator(BenchmarkOperator):
     DEFAULT_METRICS = ["latency", "accuracy", "best_config"]
@@ -57,7 +57,13 @@ class Operator(BenchmarkOperator):
 
     @register_benchmark()
     def kernelllm_matmul(self,  a: torch.Tensor, b: torch.Tensor):
-       return lambda: call([a, b])
+        M, K, N = a.shape[0], a.shape[1], b.shape[1]
+        if (M, K, N) == (256, 256, 32):
+            return lambda: call_256_256_32([a, b])
+        elif (M, K, N) == (64, 128, 32):
+            return lambda: call_64_128_32([a, b])
+        else:
+            raise RuntimeError(f"No kernel implemented for shape ({M}, {K}, {N})")
 
     @register_benchmark(baseline=True)
     def torch_matmul(self, a: torch.Tensor, b: torch.Tensor):
@@ -91,24 +97,11 @@ class Operator(BenchmarkOperator):
 
 
     def generate_sizes(self) -> List[Tuple[int, int, int]]:
-        """
-            TODO: add shapes and change the stride's layout for kernelLLM(because of the assertions)
-        """
-        sizes = []
-        
-        for M in [256]:
-            for K in [256]:
-                for N in [32]:
-                    sizes.append((M, K, N))
-        return sizes
-        
-        
+        return [[256,256,32],[64,128,32]]
 
     def get_input_iter(self) -> Generator:
-
         for size in self.generate_sizes():
             M, K, N = size
-
             x = torch.rand((M, K), device=self.device, dtype=torch.bfloat16)
             y = torch.rand((K, N), device=self.device, dtype=torch.bfloat16)
             yield x, y
