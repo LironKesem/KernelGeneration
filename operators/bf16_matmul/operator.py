@@ -91,13 +91,16 @@ class Operator(BenchmarkOperator):
         total_bytes = (a.numel() + b.numel() + c.numel()) * a.element_size()
         return total_bytes / metrics.latency * 1e-9  # GB/s
 
-    @register_metric(x_only=True)
+    @register_metric()
     def input_shape(self, fn_name: str, example_inputs, metrics: BenchmarkOperatorMetrics):
         return example_inputs[0].shape
 
 
     def generate_sizes(self) -> List[Tuple[int, int, int]]:
-        return [[256,256,32],[64,128,32]]
+        # use those shapes without kernelllm_matmul 
+        #     [(32, 64, 16),(128, 256, 64),(512, 1024, 128), (1024, 2048, 256)]
+        return [(256, 256, 32),(64, 128, 32)]
+
 
     def get_input_iter(self) -> Generator:
         for size in self.generate_sizes():
