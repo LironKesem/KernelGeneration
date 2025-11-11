@@ -49,7 +49,7 @@ def main():
     run(f"{sys.executable} install.py", cwd=str(ROOT / "tritonbench"))
 
     # For some reason, the installer script of tritonbench has some issue, so we need to install also using pip
-    run(f"{sys.executable} -m pip -e .", cwd=str(ROOT / "tritonbench"))
+    run(f"{sys.executable} -m pip install -e .", cwd=str(ROOT / "tritonbench"))
     # Step 4: Copy the operators from ./operators into tritonbench/tritonbench/operators/<name>
     source_dir = ROOT / "operators"
     dest_dir = ROOT / "tritonbench" / "tritonbench" / "operators"
