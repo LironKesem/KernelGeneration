@@ -6,12 +6,14 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
 
+
 def run(cmd, cwd=None):
     print(f"\n>>> Running: {cmd}")
     result = subprocess.run(cmd, shell=True, cwd=cwd)
     if result.returncode != 0:
         print(f"Error running command: {cmd}")
         sys.exit(result.returncode)
+
 
 def ensure_torch():
     try:
@@ -24,10 +26,12 @@ def ensure_torch():
         )
         sys.exit(1)
 
+
 def safe_copytree(src: Path, dst: Path):
     if dst.exists():
         shutil.rmtree(dst)
     shutil.copytree(src, dst)
+
 
 def main():
     ensure_torch()
@@ -62,7 +66,9 @@ def main():
     helion_dir = ROOT / "helion"
     if not helion_dir.exists():
         # Clone only the needed branch
-        run("git clone -b kernel-gen-rh --single-branch https://github.com/fulvius31/helion helion")
+        run(
+            "git clone -b kernel-gen-rh --single-branch https://github.com/fulvius31/helion helion"
+        )
     else:
         print("helion folder already exists, updating branch kernel-gen-rh...")
         run("git fetch origin", cwd=str(helion_dir))
@@ -72,7 +78,10 @@ def main():
     # Editable install
     run(f"{sys.executable} -m pip install -e helion")
 
+    # Install pytest
+    run(f"{sys.executable} -m pip install pytest")
     print("\nSetup complete!")
+
 
 if __name__ == "__main__":
     main()
