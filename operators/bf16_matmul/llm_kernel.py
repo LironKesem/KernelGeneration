@@ -63,7 +63,7 @@ def call_64_128_32(args):
             (128, 32), (32, 1), torch.bfloat16
         )
         get_raw_stream(0)
-        grid0 = lambda META: (triton.cdiv(8192 + META['XBLOCK'] - 1, META['XBLOCK']))
+        grid0 = lambda META: (triton.cdiv(8192 + META['XBLOCK'] - 1, META['XBLOCK']),)
         triton_poi_fused__to_copy[grid0](arg1_1, buf0, 8192)
         del arg1_1
         buf1 = empty_strided_cuda((64, 32), (32, 1), torch.bfloat16)
