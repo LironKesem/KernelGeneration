@@ -15,7 +15,7 @@ from .llm_kernel import call_64_128_32, call_256_256_32
 
 
 class Operator(BenchmarkOperator):
-    DEFAULT_METRICS = ["latency", "accuracy", "best_config"]
+    DEFAULT_METRICS = ["latency", "accuracy", "speedup", "tflops"]
 
     @register_benchmark()
     def triton_matmul(self, a: torch.Tensor, b: torch.Tensor):
@@ -91,18 +91,40 @@ class Operator(BenchmarkOperator):
         return result
 
     @register_metric()
-    def gbps(self, fn, example_inputs, metrics: BenchmarkOperatorMetrics):
-        a, b = example_inputs
-        # bytes moved = size of a + size of b + size of c
-        c = fn()
-        total_bytes = (a.numel() + b.numel() + c.numel()) * a.element_size()
-        return total_bytes / metrics.latency * 1e-9  # GB/s
-
-    @register_metric()
     def input_shape(
         self, fn_name: str, example_inputs, metrics: BenchmarkOperatorMetrics
     ):
         return example_inputs[0].shape
+
+    def _latency_seconds(self, lat) -> float:
+        # check if it's numeric already
+        if isinstance(lat, (int, float)):
+            return float(lat)
+
+        # TritonBench Latency object: prefer p50, fall back to min/max, then median of times
+        for attr in ("p50", "min", "max"):
+            v = getattr(lat, attr, None)
+            if isinstance(v, (int, float)):
+                return float(v)
+
+        times = getattr(lat, "times", None)
+        if isinstance(times, (list, tuple)) and times:
+            # median
+            s = sorted(float(t) for t in times)
+            return s[len(s) // 2]
+
+        raise TypeError(
+            f"Unsupported latency type: {type(lat)}; available fields: {dir(lat)}"
+        )
+
+    @register_metric()
+    def tflops(self, fn_name, example_inputs, metrics):
+        x, y = example_inputs
+        m, k = x.shape
+        n = y.shape[1]
+        flops = 2.0 * m * n * k
+        sec = self._latency_seconds(metrics.latency)
+        return flops / max(sec, 1e-12) / 1e12
 
     def generate_sizes(self) -> List[Tuple[int, int, int]]:
         # use those shapes without kernelllm_matmul
