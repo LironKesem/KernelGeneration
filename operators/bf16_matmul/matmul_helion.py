@@ -23,8 +23,7 @@ def matmul(x: torch.Tensor, y: torch.Tensor) -> torch.Tensor:
             # Use input dtypes; PyTorch addmm will promote as needed into fp32 acc
             a_tile = x[tile_m, tile_k]
             b_tile = y[tile_k, tile_n]
-            prod = torch.mm(a_tile.to(torch.bfloat16), b_tile.to(torch.bfloat16))
-            acc = acc + prod.to(torch.float32)
+            acc = torch.addmm(acc, a_tile, b_tile)
         out[tile_m, tile_n] = acc.to(out_dtype)
     return out
 
