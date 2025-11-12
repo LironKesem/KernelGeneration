@@ -4,24 +4,7 @@ import helion
 import helion.language as hl
 
 
-@helion.kernel(
-    config=helion.Config(
-        block_sizes=[4, 16, 64],
-        indexing=["tensor_descriptor", "pointer", "pointer"],
-        l2_groupings=[16],
-        load_eviction_policies=["first", ""],
-        loop_orders=[[1, 0]],
-        num_stages=2,
-        num_warps=4,
-        pid_type="xyz",
-        range_flattens=[None, None],
-        range_multi_buffers=[None, True],
-        range_num_stages=[0, 4],
-        range_unroll_factors=[0, 4],
-        range_warp_specializes=[None, None],
-    ),
-    static_shapes=True,
-)
+@helion.kernel()
 def matmul(x: torch.Tensor, y: torch.Tensor) -> torch.Tensor:
     # Shapes
     m, k = x.shape
