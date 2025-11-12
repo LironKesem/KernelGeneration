@@ -11,5 +11,5 @@ env/
 .DS_Store
 Thumbs.db
 
-tritonbench/tritonbench/.cache/
-tritonbench/tritonbench/tmp/
+tritonbench/
+helion/
