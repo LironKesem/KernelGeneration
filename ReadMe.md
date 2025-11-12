@@ -71,7 +71,12 @@ kernelGen/
    export TRITONBENCH_HELION_PATH="$(pwd)/helion"
    ```
 4. Run the benchmark:
+   For CUDA :
    ```bash
    python tritonbench/run.py 
+   ```
+   For ROCm, since Helion uses `tf32` by default :
+      ```bash
+   TRITON_F32_DEFAULT=ieee python tritonbench/run.py 
    ```
 
