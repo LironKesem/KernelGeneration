@@ -4,7 +4,24 @@ import helion
 import helion.language as hl
 
 
-@helion.kernel()
+@helion.kernel(
+    config=helion.Config(
+        block_sizes=[4, 16, 64],
+        indexing=["tensor_descriptor", "pointer", "pointer"],
+        l2_groupings=[16],
+        load_eviction_policies=["first", ""],
+        loop_orders=[[1, 0]],
+        num_stages=2,
+        num_warps=4,
+        pid_type="xyz",
+        range_flattens=[None, None],
+        range_multi_buffers=[None, True],
+        range_num_stages=[0, 4],
+        range_unroll_factors=[0, 4],
+        range_warp_specializes=[None, None],
+    ),
+    static_shapes=True,
+)
 def matmul(x: torch.Tensor, y: torch.Tensor) -> torch.Tensor:
     # Shapes
     m, k = x.shape
@@ -23,7 +40,8 @@ def matmul(x: torch.Tensor, y: torch.Tensor) -> torch.Tensor:
             # Use input dtypes; PyTorch addmm will promote as needed into fp32 acc
             a_tile = x[tile_m, tile_k]
             b_tile = y[tile_k, tile_n]
-            acc = torch.addmm(acc, a_tile, b_tile)
+            prod = torch.mm(a_tile.to(torch.bfloat16), b_tile.to(torch.bfloat16))
+            acc = acc + prod.to(torch.float32)
         out[tile_m, tile_n] = acc.to(out_dtype)
     return out
 
