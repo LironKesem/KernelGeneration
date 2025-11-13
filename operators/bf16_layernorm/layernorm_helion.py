@@ -48,7 +48,6 @@ class LayerNormFunction(torch.autograd.Function):
         eps: float,
     ) -> torch.Tensor:
         y = layer_norm_fwd(x, normalized_shape, eps)[0]
-        ctx.normalized_shape = normalized_shape
         return y
 
 
