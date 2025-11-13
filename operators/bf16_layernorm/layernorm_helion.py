@@ -58,6 +58,12 @@ def layer_norm_fwd(
 
 
 class LayerNormFunction(torch.autograd.Function):
+    """
+    Forward-only implementation of LayerNorm.
+
+    This class does not support backward pass (no gradient computation).
+    Affine transformation (weight and bias) is not supported.
+    """
     @staticmethod
     def forward(
         ctx: Any,
