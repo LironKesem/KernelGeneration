@@ -19,10 +19,6 @@ class Operator(BenchmarkOperator):
 
     @register_benchmark()
     def triton_matmul(self, a: torch.Tensor, b: torch.Tensor):
-        print(f"A SIZE: {a.size()}")
-        print(f"B SIZE: {b.size()}")
-
-        # Check constraints.
         assert a.shape[1] == b.shape[0], "Incompatible dimensions"
         assert a.is_contiguous(), "Matrix A must be contiguous"
         assert (
@@ -38,10 +34,6 @@ class Operator(BenchmarkOperator):
         )
 
         def _inner():
-
-            # session_id = proton.start(name="matmul_profile", context="python")
-            # with proton.scope("matmul_kernel"):
-
             matmul_kernel[grid](
                 a,
                 b,
@@ -56,7 +48,6 @@ class Operator(BenchmarkOperator):
                 c.stride(0),
                 c.stride(1),  #
             )
-            # proton.finalize()
             return c
 
         return _inner
