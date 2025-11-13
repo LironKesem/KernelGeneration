@@ -11,6 +11,24 @@ def layer_norm_fwd(
     normalized_shape: list[int],
     eps: float = 1e-5,
 ) -> tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
+    """
+    Computes 1D layer normalization (without affine transformation) for the input tensor.
+
+    Args:
+        x (torch.Tensor): Input tensor of shape (m, n).
+        normalized_shape (list[int]): List containing a single integer, the size of the normalized dimension (must match n).
+        eps (float, optional): Small value added to variance for numerical stability. Default is 1e-5.
+
+    Returns:
+        tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
+            - out (torch.Tensor): Normalized output tensor of shape (m, n), same dtype as input.
+            - mean (torch.Tensor): Mean of each row, shape (m,), dtype float32.
+            - rstd (torch.Tensor): Reciprocal of standard deviation of each row, shape (m,), dtype float32.
+
+    Constraints:
+        - Only supports 1D layer normalization (len(normalized_shape) == 1).
+        - Does not include affine transformation (no learnable weight or bias).
+    """
     m, n = x.size()
     assert len(normalized_shape) == 1, "1D layer norm only"
     assert normalized_shape[0] == n, "normalized shape mismatch"
