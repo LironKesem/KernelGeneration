@@ -54,9 +54,29 @@ class LayerNormFunction(torch.autograd.Function):
 def layer_norm(
     x: torch.Tensor, normalized_shape: list[int], eps: float = 1e-5
 ) -> torch.Tensor:
+    """
+    Applies forward-only layer normalization to the input tensor without affine parameters.
+
+    This function normalizes the last dimension of the input tensor using the mean and variance,
+    but does not apply any learnable scale or bias (affine transformation).
+
+    Args:
+        x (torch.Tensor): Input tensor of shape (batch_size, normalized_shape[0]).
+        normalized_shape (list[int]): List containing the size of the normalized dimension (must be 1D).
+        eps (float, optional): A value added to the denominator for numerical stability. Default: 1e-5.
+
+    Returns:
+        torch.Tensor: The normalized tensor with the same shape and dtype as the input.
+
+    Example:
+        >>> import torch
+        >>> from operators.bf16_layernorm.layernorm_helion import layer_norm
+        >>> x = torch.randn(8, 16)
+        >>> y = layer_norm(x, [16])
+        >>> print(y.shape)
+        torch.Size([8, 16])
+    """
     return LayerNormFunction.apply(x, normalized_shape, eps)
-
-
 def layer_norm_tritonbench(
     tb_op: object,
     x: torch.Tensor,
