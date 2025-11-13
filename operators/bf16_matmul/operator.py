@@ -12,7 +12,7 @@ from tritonbench.utils.triton_op import (
 )
 from .kernels import matmul_kernel
 from .llm_kernel import call_64_128_32, call_256_256_32
-
+from .mako_kernel import mako_kernel
 
 class Operator(BenchmarkOperator):
     DEFAULT_METRICS = ["latency", "accuracy", "speedup", "tflops"]
@@ -70,6 +70,10 @@ class Operator(BenchmarkOperator):
             return lambda: call_64_128_32([a, b])
         else:
             raise RuntimeError(f"No kernel implemented for shape ({M}, {K}, {N})")
+    
+    @register_benchmark()
+    def mako_matmul(self, a: torch.Tensor, b: torch.Tensor):
+        return lambda: mako_kernel(a, b)
 
     @register_benchmark(baseline=True)
     def torch_matmul(self, a: torch.Tensor, b: torch.Tensor):
