@@ -12,8 +12,8 @@ def layer_norm_fwd(
     eps: float = 1e-5,
 ) -> tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
     m, n = x.size()
-    assert len(normalized_shape) == 1, ("1D layer norm only")
-    assert normalized_shape[0] == n, ("normalized shape mismatch")
+    assert len(normalized_shape) == 1, "1D layer norm only"
+    assert normalized_shape[0] == n, "normalized shape mismatch"
 
     out = torch.empty([m, n], dtype=x.dtype, device=x.device)
     mean = torch.empty([m], dtype=torch.float32, device=x.device)
