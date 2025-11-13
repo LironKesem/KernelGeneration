@@ -64,6 +64,7 @@ class LayerNormFunction(torch.autograd.Function):
     This class does not support backward pass (no gradient computation).
     Affine transformation (weight and bias) is not supported.
     """
+
     @staticmethod
     def forward(
         ctx: Any,
@@ -91,16 +92,10 @@ def layer_norm(
 
     Returns:
         torch.Tensor: The normalized tensor with the same shape and dtype as the input.
-
-    Example:
-        >>> import torch
-        >>> from operators.bf16_layernorm.layernorm_helion import layer_norm
-        >>> x = torch.randn(8, 16)
-        >>> y = layer_norm(x, [16])
-        >>> print(y.shape)
-        torch.Size([8, 16])
     """
     return LayerNormFunction.apply(x, normalized_shape, eps)
+
+
 def layer_norm_tritonbench(
     tb_op: object,
     x: torch.Tensor,
