@@ -6,7 +6,7 @@ import helion.language as hl
 
 
 @helion.kernel(static_shapes=True)
-def matmul_gelu(x: torch.Tensor, y: torch.Tensor, bias: torch.Tensor) -> torch.Tensor:
+def gemm_gelu(x: torch.Tensor, y: torch.Tensor, bias: torch.Tensor) -> torch.Tensor:
     # Shapes
     m, k = x.shape
     k2, n = y.shape
@@ -34,8 +34,8 @@ def matmul_gelu(x: torch.Tensor, y: torch.Tensor, bias: torch.Tensor) -> torch.T
     return out
 
 
-def matmul_gelu_tritonbench(
+def gemm_gelu_tritonbench(
         tb_op, a: torch.Tensor, b: torch.Tensor, bias: torch.Tensor
 ) -> Callable[[], torch.Tensor]:
     """TritonBench wrapper: MUST return a zero-arg callable for timing."""
-    return lambda: matmul_gelu(a, b, bias)
+    return lambda: gemm_gelu(a, b, bias)
