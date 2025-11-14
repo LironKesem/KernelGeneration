@@ -19,7 +19,7 @@ from tritonbench.utils.triton_op import (
     register_metric,
 )
 from .kernels import layer_norm
-from .kernelllm import call_512_512
+from .kernelllm import call_512_512, call_1024_8192
 from .mako_kernel import mako_layernorm
 
 class Operator(BenchmarkOperator):
@@ -52,8 +52,8 @@ class Operator(BenchmarkOperator):
 
         if (M, D) == (512, 512):
             return lambda: call_512_512([weight, bias, x])[0]
-        #elif (M, D) == (1024, 8192):
-        #    return lambda: call_1024_8192([weight, bias, x])[0]
+        elif (M, D) == (1024, 8192):
+            return lambda: call_1024_8192([weight, bias, x])[0]
         else:
             raise RuntimeError(f"No kernel implemented for shape ({M}, {D})")
 
@@ -93,7 +93,7 @@ class Operator(BenchmarkOperator):
         return example_inputs[0].shape
 
     def generate_sizes(self) -> List[Tuple[int, int]]:
-        return [(512, 512)] #, (1024, 8192)]
+        return [(512, 512), (1024, 8192)]
 
 
     def get_input_iter(self) -> Generator:
