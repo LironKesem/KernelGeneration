@@ -11,6 +11,8 @@ from tritonbench.utils.triton_op import (
 )
 from .triton_kernel import triton_gemm_gelu_kernel
 from .kernelllm import call_512_2048_4096
+from .mako_kernel import fused_gemm_bias_gelu
+
 class Operator(BenchmarkOperator):
     DEFAULT_METRICS = ["latency", "accuracy", "speedup", "tflops"]
 
@@ -22,6 +24,13 @@ class Operator(BenchmarkOperator):
             out = torch.nn.functional.gelu(out)  # uses erf internally
             return out
         return _fn
+
+    # NOTE: it uses the tahn approximate, 
+    #.      tested compare the torch with default(erf) and tahn the test fails(accuracy check)
+    # @register_benchmark(baseline=True)
+    # def mako_gemm_gelu(self, a: torch.Tensor, b: torch.Tensor, bias: torch.Tensor):
+    #         return lambda:fused_gemm_bias_gelu(a, b, bias)
+
 
     @register_benchmark()
     def kernelllm_gemm_gelu(self, a: torch.Tensor, b: torch.Tensor, bias: torch.Tensor):
@@ -46,6 +55,7 @@ class Operator(BenchmarkOperator):
 
         return lambda: _inner(a, b, bias)
 
+    # TODO: inside the triton kernel we need to check how we can use triton erf function
     @register_benchmark()
     def triton_gemm_gelu_kernel(self, a: torch.Tensor, b: torch.Tensor, bias: torch.Tensor):
         assert a.shape[1] == b.shape[0], "Incompatible dimensions"
