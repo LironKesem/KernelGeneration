@@ -101,7 +101,7 @@ class Operator(BenchmarkOperator):
         eps = 1e-5
         for size in self.generate_sizes():
             normalized_shape = (size[-1])
-            x = -2.3 + 0.5 * torch.rand(size, device=self.device, dtype=dtype)
+            x = torch.randn(size, device='cuda', dtype=torch.bfloat16).contiguous()
             x.requires_grad_(True)
 
             weight = torch.ones(normalized_shape, device=self.device, dtype=dtype, requires_grad=True)
