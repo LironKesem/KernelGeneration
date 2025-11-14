@@ -27,7 +27,7 @@ class Operator(BenchmarkOperator):
     def kernelllm_gemm_gelu(self, a: torch.Tensor, b: torch.Tensor, bias: torch.Tensor):
         M, K = a.shape
         K2, N = b.shape
-
+        assert K == K2, "Incompatible dimensions"
         if (M, K, N) == (512, 2048, 4096):
             return lambda: call_512_2048_4096([a, b, bias])[0]
         #elif (M, K, N) == (1024, 8192, 1024):
