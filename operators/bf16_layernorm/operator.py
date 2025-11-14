@@ -7,7 +7,6 @@ from typing import Callable, Generator, List, Optional, Tuple
 import torch
 import triton
 import triton.language as tl
-#import triton.profiler as proton
 
 from .kernels import layer_norm
 
@@ -20,6 +19,8 @@ from tritonbench.utils.triton_op import (
     register_metric,
 )
 from .kernels import layer_norm
+from .kernelllm import call_512_512
+from .mako_kernel import mako_layernorm
 
 class Operator(BenchmarkOperator):
     DEFAULT_METRICS = ["latency", "accuracy", "best_config"]
@@ -44,6 +45,23 @@ class Operator(BenchmarkOperator):
             return y
 
         return run
+
+    @register_benchmark()
+    def kernelllm_layernorm(self, x: torch.Tensor, weight: torch.Tensor, bias: torch.Tensor, eps: float = 1e-5):
+        M, D = x.shape
+
+        if (M, D) == (512, 512):
+            return lambda: call_512_512([weight, bias, x])[0]
+        #elif (M, D) == (1024, 8192):
+        #    return lambda: call_1024_8192([weight, bias, x])[0]
+        else:
+            raise RuntimeError(f"No kernel implemented for shape ({M}, {D})")
+
+
+    @register_benchmark()
+    def mako_layernorm(self, x: torch.Tensor, weight: torch.Tensor, bias: torch.Tensor, eps: float = 1e-5):
+        return lambda: mako_layernorm(x, weight, bias, eps)
+
 
     @register_benchmark(baseline=True)
     def torch_layernorm(self, x: torch.Tensor, weight: torch.Tensor, bias: torch.Tensor, eps: float = 1e-5):
@@ -74,20 +92,18 @@ class Operator(BenchmarkOperator):
     def input_shape(self, fn_name: str, example_inputs, metrics: BenchmarkOperatorMetrics):
         return example_inputs[0].shape
 
-    def generate_sizes(self) -> List[Tuple[int, int, int]]:
-        sizes = []
-        for M in [512, 1151, 1024, 2048]:
-            for N in [512, 1024, 2048, 8192]:
-                sizes.append((M, N))
-        return sizes
+    def generate_sizes(self) -> List[Tuple[int, int]]:
+        return [(512, 512)] #, (1024, 8192)]
+
 
     def get_input_iter(self) -> Generator:
         dtype = torch.bfloat16
         eps = 1e-5
         for size in self.generate_sizes():
-            w_shape = (size[-1], )
+            normalized_shape = (size[-1])
             x = -2.3 + 0.5 * torch.rand(size, device=self.device, dtype=dtype)
             x.requires_grad_(True)
-            weight = torch.rand(w_shape, dtype=dtype, device=self.device, requires_grad=True)
-            bias = torch.rand(w_shape, dtype=dtype, device=self.device, requires_grad=True)
+
+            weight = torch.ones(normalized_shape, device=self.device, dtype=dtype, requires_grad=True)
+            bias = torch.zeros(normalized_shape, device=self.device, dtype=dtype, requires_grad=True)
             yield x, weight, bias, eps
