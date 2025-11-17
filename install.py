@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 import subprocess
+import os
 import sys
-import shutil
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
@@ -27,10 +27,10 @@ def ensure_torch():
         sys.exit(1)
 
 
-def safe_copytree(src: Path, dst: Path):
+def safe_symlink(src: Path, dst: Path):
     if dst.exists():
-        shutil.rmtree(dst)
-    shutil.copytree(src, dst)
+        os.unlink(dst)
+    os.symlink(src, dst)
 
 
 def main():
@@ -59,10 +59,10 @@ def main():
         for item in sorted(source_dir.iterdir()):
             if item.is_dir():
                 target = dest_dir / item.name
-                safe_copytree(item, target)
+                safe_symlink(item, target)
                 print(f"Copied {item.name} -> {target}")
     else:
-        print("No local ./operators directory found; skipping operator copy.")
+        print("No local ./operators directory found; not creating symlink.")
 
     # Step 5: Clone custom Helion (kernel-gen-rh branch) and install editable
     helion_dir = ROOT / "helion"
