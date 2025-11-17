@@ -17,6 +17,7 @@ from tritonbench.utils.triton_op import (
     Mode,
     register_benchmark,
     register_metric,
+    register_x_val
 )
 from .kernels import layer_norm
 from .kernelllm import call_512_512, call_1024_8192
@@ -107,3 +108,9 @@ class Operator(BenchmarkOperator):
             weight = torch.ones(normalized_shape, device=self.device, dtype=dtype, requires_grad=True)
             bias = torch.zeros(normalized_shape, device=self.device, dtype=dtype, requires_grad=True)
             yield x, weight, bias, eps
+
+    @register_x_val(label="(M, D)")
+    def get_x_val(self, example_inputs) -> Tuple[int, int]:
+        x, weight, bias, eps = example_inputs
+        M, D = x.size()
+        return (M, D)

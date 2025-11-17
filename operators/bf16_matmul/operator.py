@@ -9,6 +9,7 @@ from tritonbench.utils.triton_op import (
     BenchmarkOperatorMetrics,
     register_benchmark,
     register_metric,
+    register_x_val,
 )
 from .kernels import matmul_kernel
 from .llm_kernel import call_64_128_32, call_256_256_32
@@ -132,3 +133,10 @@ class Operator(BenchmarkOperator):
             x = torch.rand((M, K), device=self.device, dtype=torch.bfloat16)
             y = torch.rand((K, N), device=self.device, dtype=torch.bfloat16)
             yield x, y
+    
+    @register_x_val(label="(M, K, N)")
+    def get_x_val(self, example_inputs) -> Tuple[int, int, int]:
+        a, w = example_inputs
+        m, k = a.size()
+        k, n = w.size()
+        return (m, k, n)

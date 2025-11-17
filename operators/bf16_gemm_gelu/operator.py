@@ -8,6 +8,7 @@ from tritonbench.utils.triton_op import (
     BenchmarkOperatorMetrics,
     register_benchmark,
     register_metric,
+    register_x_val
 )
 from .triton_kernel import triton_gemm_gelu_kernel
 from .kernelllm import call_512_2048_4096
@@ -140,3 +141,10 @@ class Operator(BenchmarkOperator):
             B = torch.rand((K, N), device=self.device, dtype=torch.bfloat16)
             bias = torch.rand((N,), device=self.device, dtype=torch.bfloat16)
             yield A, B, bias
+
+    @register_x_val(label="(M, K, N)")
+    def get_x_val(self, example_inputs) -> Tuple[int, int, int]:
+        a, b, bias = example_inputs
+        M, K = a.size()
+        K_, N = b.size()
+        return (M, K, N)
