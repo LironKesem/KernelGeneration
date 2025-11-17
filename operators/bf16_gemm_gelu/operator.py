@@ -8,11 +8,12 @@ from tritonbench.utils.triton_op import (
     BenchmarkOperatorMetrics,
     register_benchmark,
     register_metric,
-    register_x_val
+    register_x_val,
 )
 from .triton_kernel import triton_gemm_gelu_kernel
 from .kernelllm import call_512_2048_4096
 from .mako_kernel import fused_gemm_bias_gelu
+
 
 class Operator(BenchmarkOperator):
     DEFAULT_METRICS = ["latency", "accuracy", "speedup", "tflops"]
@@ -24,14 +25,14 @@ class Operator(BenchmarkOperator):
             out = out + bias  # broadcast along dim 0
             out = torch.nn.functional.gelu(out)  # uses erf internally
             return out
+
         return _fn
 
-    # NOTE: it uses the tahn approximate, 
-    #.      tested compare the torch with default(erf) and tahn the test fails(accuracy check)
+    # NOTE: it uses the tahn approximate,
+    # .      tested compare the torch with default(erf) and tahn the test fails(accuracy check)
     # @register_benchmark(baseline=True)
     # def mako_gemm_gelu(self, a: torch.Tensor, b: torch.Tensor, bias: torch.Tensor):
     #         return lambda:fused_gemm_bias_gelu(a, b, bias)
-
 
     @register_benchmark()
     def kernelllm_gemm_gelu(self, a: torch.Tensor, b: torch.Tensor, bias: torch.Tensor):
@@ -40,29 +41,37 @@ class Operator(BenchmarkOperator):
         assert K == K2, "Incompatible dimensions"
         if (M, K, N) == (512, 2048, 4096):
             return lambda: call_512_2048_4096([a, b, bias])[0]
-        #elif (M, K, N) == (1024, 8192, 1024):
+        # elif (M, K, N) == (1024, 8192, 1024):
         #    return lambda: call([a, b, bias])[0]
         else:
             raise RuntimeError(f"No kernel implemented for shape ({M}, {K}, {N})")
 
     @register_benchmark()
-    def torch_compile_gemm_gelu(self, a: torch.Tensor, b: torch.Tensor, bias: torch.Tensor):
+    def torch_compile_gemm_gelu(
+        self, a: torch.Tensor, b: torch.Tensor, bias: torch.Tensor
+    ):
         @torch.compile(mode="max-autotune-no-cudagraphs")
         def _inner(a, b, bias):
             out = torch.matmul(a, b)
             out = out + bias  # broadcast along dim 0
-            out =  torch.nn.functional.gelu(out)
+            out = torch.nn.functional.gelu(out)
             return out
 
         return lambda: _inner(a, b, bias)
 
     # TODO: inside the triton kernel we need to check how we can use triton erf function
     @register_benchmark()
-    def triton_gemm_gelu_kernel(self, a: torch.Tensor, b: torch.Tensor, bias: torch.Tensor):
+    def triton_gemm_gelu_kernel(
+        self, a: torch.Tensor, b: torch.Tensor, bias: torch.Tensor
+    ):
         assert a.shape[1] == b.shape[0], "Incompatible dimensions"
-        assert a.is_contiguous() and b.is_contiguous() and bias.is_contiguous(), "All inputs must be contiguous"
         assert (
-            a.dtype == torch.bfloat16 and b.dtype == torch.bfloat16 and bias.dtype == torch.bfloat16
+            a.is_contiguous() and b.is_contiguous() and bias.is_contiguous()
+        ), "All inputs must be contiguous"
+        assert (
+            a.dtype == torch.bfloat16
+            and b.dtype == torch.bfloat16
+            and bias.dtype == torch.bfloat16
         ), "Matrices must be bfloat16"
         M, K = a.shape
         K2, N = b.shape
@@ -109,11 +118,9 @@ class Operator(BenchmarkOperator):
         return example_inputs[0].shape
 
     def _latency_seconds(self, lat) -> float:
-        # check if it's numeric already
         if isinstance(lat, (int, float)):
             return float(lat)
 
-        # TritonBench Latency object: prefer p50, fall back to min/max, then median of times
         for attr in ("p50", "min", "max"):
             v = getattr(lat, attr, None)
             if isinstance(v, (int, float)):
@@ -121,13 +128,33 @@ class Operator(BenchmarkOperator):
 
         times = getattr(lat, "times", None)
         if isinstance(times, (list, tuple)) and times:
-            # median
             s = sorted(float(t) for t in times)
             return s[len(s) // 2]
 
         raise TypeError(
             f"Unsupported latency type: {type(lat)}; available fields: {dir(lat)}"
         )
+
+    @register_metric()
+    def tflops(self, fn_name, example_inputs, metrics):
+        # All benchmarks for this operator use (a, b, bias)
+        a, b, bias = example_inputs
+        M, K = a.shape
+        K2, N = b.shape
+        assert K == K2, f"Incompatible dimensions: {K} != {K2}"
+
+        # GEMM FLOPs: 2 * M * N * K (mul + add)
+        gemm_flops = 2.0 * M * N * K
+
+        # Optional: rough count for bias add + GELU
+        # bias add: M * N
+        # GELU: ~4 ops per element (very rough)
+        extra_flops = M * N * (1 + 4)
+
+        total_flops = gemm_flops + extra_flops
+
+        sec = self._latency_seconds(metrics.latency)
+        return total_flops / max(sec, 1e-12) / 1e12  # TFLOPs
 
     def generate_sizes(self) -> List[Tuple[int, int, int]]:
         # use those shapes without kernelllm_matmul
