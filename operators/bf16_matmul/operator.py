@@ -91,19 +91,24 @@ class Operator(BenchmarkOperator):
     def _latency_seconds(self, lat) -> float:
         # check if it's numeric already
         if isinstance(lat, (int, float)):
-            return float(lat) /1000.0  # convert ms -> s
+            return float(lat) / (1e3)  # convert ms -> s
 
         # TritonBench Latency object: prefer p50, fall back to min/max, then median of times
         for attr in ("p50", "min", "max"):
             v = getattr(lat, attr, None)
             if isinstance(v, (int, float)):
-                return float(v) /1000.0 # convert ms -> s
+                return float(v) / (1e3) # convert ms -> s
 
         times = getattr(lat, "times", None)
         if isinstance(times, (list, tuple)) and times:
             # median
             s = sorted(float(t) for t in times)
-            return s[len(s) // 2]/ 1000.00  # convert ms -> s
+            n = len(s)
+            if n%2 == 1 :
+                median = s[n // 2]
+            else:
+                median =(s[n //2 -1] + s[n//2]) /2 
+            return median / (1e3)  # convert ms -> s
 
         raise TypeError(
             f"Unsupported latency type: {type(lat)}; available fields: {dir(lat)}"
