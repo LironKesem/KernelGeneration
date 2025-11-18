@@ -19,10 +19,6 @@ class Model(nn.Module):
         out = out + bias
         out = self.gelu(out)  # use module
         return out
-# This is how functions below will be used during
-# validation and benchmarking
-# model = Model(*get_init_inputs())
-# output = model(*get_inputs())
 
 def get_inputs():
     M, K, N = 512, 2048, 4096
