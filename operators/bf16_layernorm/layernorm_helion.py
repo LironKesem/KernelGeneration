@@ -11,7 +11,7 @@ def layer_norm_fwd(
     x: torch.Tensor,
     normalized_shape: int,
     eps: float = 1e-5,
-) -> tuple[torch.Tensor, torch.Tensor, torch.Tensor]:
+) -> torch.Tensor:
     """
     Computes 1D layer normalization (without affine transformation) for the input tensor.
 
@@ -31,8 +31,6 @@ def layer_norm_fwd(
     assert normalized_shape == n, "normalized shape mismatch"
 
     out = torch.empty([m, n], dtype=x.dtype, device=x.device)
-    mean = torch.empty([m], dtype=torch.float32, device=x.device)
-    rstd = torch.empty([m], dtype=torch.float32, device=x.device)
 
     for tile_m in hl.tile(m):
         acc = x[tile_m, :].to(torch.float32)
@@ -47,10 +45,8 @@ def layer_norm_fwd(
         normalized = centered * rstd_val[:, None]
 
         out[tile_m, :] = normalized.to(x.dtype)
-        mean[tile_m] = mean_val
-        rstd[tile_m] = rstd_val
 
-    return out, mean, rstd
+    return out
 
 
 class LayerNormFunction(torch.autograd.Function):
