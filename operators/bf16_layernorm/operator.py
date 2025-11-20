@@ -20,7 +20,7 @@ from tritonbench.utils.triton_op import (
     register_x_val
 )
 from .kernels import layer_norm
-from .kernelllm import call_512_512, call_1024_8192
+from .kernelllm import KLLMLayerNorm
 from .mako_kernel import mako_layernorm
 
 class Operator(BenchmarkOperator):
@@ -49,16 +49,8 @@ class Operator(BenchmarkOperator):
 
     @register_benchmark()
     def kernelllm_layernorm(self, x: torch.Tensor, weight: torch.Tensor, bias: torch.Tensor, eps: float = 1e-5):
-        M, D = x.shape
-
-        if (M, D) == (512, 512):
-            return lambda: call_512_512([weight, bias, x])[0]
-        # this will fail for accuracy test
-        # elif (M, D) == (1024, 8192):
-        #    return lambda: call_1024_8192([weight, bias, x])[0]
-        else:
-            raise RuntimeError(f"No kernel implemented for shape ({M}, {D})")
-
+        kllm=KLLMLayerNorm()
+        return lambda: kllm(x, weight, bias)
 
     @register_benchmark()
     def mako_layernorm(self, x: torch.Tensor, weight: torch.Tensor, bias: torch.Tensor, eps: float = 1e-5):
@@ -95,8 +87,7 @@ class Operator(BenchmarkOperator):
         return example_inputs[0].shape
 
     def generate_sizes(self) -> List[Tuple[int, int]]:
-        return [(512, 512)] #, (1024, 8192)]
-
+        return [(512, 512), (32, 1024), (2048,2048)]
 
     def get_input_iter(self) -> Generator:
         dtype = torch.bfloat16
