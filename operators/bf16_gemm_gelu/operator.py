@@ -12,7 +12,7 @@ from tritonbench.utils.triton_op import (
 )
 from .triton_kernel import triton_gemm_gelu_kernel
 from .kernelllm import call_512_2048_4096
-from .mako_kernel import fused_gemm_bias_gelu
+from .mako_kernel import MakoFusGelu
 
 
 class Operator(BenchmarkOperator):
@@ -28,11 +28,10 @@ class Operator(BenchmarkOperator):
 
         return _fn
 
-    # NOTE: it uses the tahn approximate,
-    # .      tested compare the torch with default(erf) and tahn the test fails(accuracy check)
-    # @register_benchmark(baseline=True)
-    # def mako_gemm_gelu(self, a: torch.Tensor, b: torch.Tensor, bias: torch.Tensor):
-    #         return lambda:fused_gemm_bias_gelu(a, b, bias)
+    @register_benchmark()
+    def mako_gemm_gelu(self, a: torch.Tensor, b: torch.Tensor, bias: torch.Tensor):
+            mako_gelu = MakoFusGelu()
+            return lambda:mako_gelu(a, b, bias)
 
     @register_benchmark()
     def kernelllm_gemm_gelu(self, a: torch.Tensor, b: torch.Tensor, bias: torch.Tensor):

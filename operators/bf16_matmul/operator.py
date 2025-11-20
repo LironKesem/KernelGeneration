@@ -10,9 +10,10 @@ from tritonbench.utils.triton_op import (
     register_benchmark,
     register_metric,
     register_x_val,
+    register_x_val,
 )
 from .kernels import matmul_kernel
-from .llm_kernel import call_64_128_32, call_256_256_32
+from .llm_kernel import BF16MatmulMako
 from .mako_kernel import mako_kernel
 
 class Operator(BenchmarkOperator):
@@ -55,14 +56,9 @@ class Operator(BenchmarkOperator):
 
     @register_benchmark()
     def kernelllm_matmul(self, a: torch.Tensor, b: torch.Tensor):
-        M, K, N = a.shape[0], a.shape[1], b.shape[1]
-        if (M, K, N) == (256, 256, 32):
-            return lambda: call_256_256_32([a, b])
-        elif (M, K, N) == (64, 128, 32):
-            return lambda: call_64_128_32([a, b])
-        else:
-            raise RuntimeError(f"No kernel implemented for shape ({M}, {K}, {N})")
-    
+        kernelllm_matmul_object = BF16MatmulMako()
+        return lambda:kernelllm_matmul_object.forward(a,b)
+
     @register_benchmark()
     def mako_matmul(self, a: torch.Tensor, b: torch.Tensor):
         return lambda: mako_kernel(a, b)
@@ -95,19 +91,24 @@ class Operator(BenchmarkOperator):
     def _latency_seconds(self, lat) -> float:
         # check if it's numeric already
         if isinstance(lat, (int, float)):
-            return float(lat)
+            return float(lat) / (1e3)  # convert ms -> s
 
         # TritonBench Latency object: prefer p50, fall back to min/max, then median of times
         for attr in ("p50", "min", "max"):
             v = getattr(lat, attr, None)
             if isinstance(v, (int, float)):
-                return float(v)
+                return float(v) / (1e3) # convert ms -> s
 
         times = getattr(lat, "times", None)
         if isinstance(times, (list, tuple)) and times:
             # median
             s = sorted(float(t) for t in times)
-            return s[len(s) // 2]
+            n = len(s)
+            if n%2 == 1 :
+                median = s[n // 2]
+            else:
+                median =(s[n //2 -1] + s[n//2]) /2 
+            return median / (1e3)  # convert ms -> s
 
         raise TypeError(
             f"Unsupported latency type: {type(lat)}; available fields: {dir(lat)}"
@@ -123,9 +124,38 @@ class Operator(BenchmarkOperator):
         return flops / max(sec, 1e-12) / 1e12
 
     def generate_sizes(self) -> List[Tuple[int, int, int]]:
-        # use those shapes without kernelllm_matmul
-        #     [(32, 64, 16),(128, 256, 64),(512, 1024, 128), (1024, 2048, 256)]
-        return [(256, 256, 32), (64, 128, 32)]
+        return [
+            (256, 384, 512),
+            (384, 512, 640),
+            (512, 640, 768),
+            (640, 768, 896),
+            (768, 896, 1024),
+            (896, 1024, 1152),
+            (1024, 1152, 1280),
+            (1152, 1280, 1408),
+            (1280, 1408, 1536),
+            (1408, 1536, 1664),
+            (1536, 1664, 1792),
+            (1664, 1792, 1920),
+            (1792, 1920, 2048),
+            (2048, 2176, 2304),
+            (2176, 2304, 2432),
+            (2304, 2432, 2560),
+            (2432, 2560, 2688),
+            (2560, 2688, 2816),
+            (2688, 2816, 2944),
+            (2816, 2944, 3072),
+            (2944, 3072, 3200),
+            (3072, 3200, 3328),
+            (3200, 3328, 3456),
+            (3328, 3456, 3584),
+            (3456, 3584, 3712),
+            (3584, 3712, 3840),
+            (3712, 3840, 3968),
+            (3840, 3968, 4096),
+            (3968, 4096, 4224),
+            (4096, 4224, 4352)
+        ]
 
     def get_input_iter(self) -> Generator:
         for size in self.generate_sizes():
