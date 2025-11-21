@@ -19,7 +19,7 @@ from tritonbench.utils.triton_op import (
     register_metric,
     register_x_val
 )
-from .kernels import layer_norm
+from .triton_kernel import layer_norm
 from .kernelllm import KLayerNorm
 from .mako_kernel import mako_layernorm
 

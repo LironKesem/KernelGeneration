@@ -12,8 +12,8 @@ from tritonbench.utils.triton_op import (
     register_x_val,
     register_x_val,
 )
-from .kernels import matmul_kernel
-from .llm_kernel import KMatmul
+from .triton_kernel import matmul_kernel
+from .kernelllm import KMatmul
 from .mako_kernel import mako_kernel
 
 class Operator(BenchmarkOperator):
