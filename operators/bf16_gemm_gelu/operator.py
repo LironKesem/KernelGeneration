@@ -11,7 +11,7 @@ from tritonbench.utils.triton_op import (
     register_x_val,
 )
 from .triton_kernel import triton_gemm_gelu_kernel
-from .kernelllm import call_512_2048_4096
+from .kernelllm import KGemmGelu
 from .mako_kernel import MakoFusGelu
 
 
@@ -35,15 +35,8 @@ class Operator(BenchmarkOperator):
 
     @register_benchmark()
     def kernelllm_gemm_gelu(self, a: torch.Tensor, b: torch.Tensor, bias: torch.Tensor):
-        M, K = a.shape
-        K2, N = b.shape
-        assert K == K2, "Incompatible dimensions"
-        if (M, K, N) == (512, 2048, 4096):
-            return lambda: call_512_2048_4096([a, b, bias])[0]
-        # elif (M, K, N) == (1024, 8192, 1024):
-        #    return lambda: call([a, b, bias])[0]
-        else:
-            raise RuntimeError(f"No kernel implemented for shape ({M}, {K}, {N})")
+        kllm_gelu = KGemmGelu()
+        return lambda: kllm_gelu.forward(a, b, bias)
 
     @register_benchmark()
     def torch_compile_gemm_gelu(
@@ -156,9 +149,7 @@ class Operator(BenchmarkOperator):
         return total_flops / max(sec, 1e-12) / 1e12  # TFLOPs
 
     def generate_sizes(self) -> List[Tuple[int, int, int]]:
-        # use those shapes without kernelllm_matmul
-        #     [(32, 64, 16),(128, 256, 64),(512, 1024, 128), (1024, 2048, 256)]
-        return [(512, 2048, 4096)]
+        return [(32, 64, 16),(128, 256, 64),(512, 1024, 128), (1024, 2048, 256),(512, 2048, 4096)]
 
     def get_input_iter(self) -> Generator:
         for size in self.generate_sizes():

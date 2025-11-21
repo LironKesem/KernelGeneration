@@ -13,7 +13,7 @@ from tritonbench.utils.triton_op import (
     register_x_val,
 )
 from .kernels import matmul_kernel
-from .llm_kernel import BF16MatmulMako
+from .llm_kernel import KMatmul
 from .mako_kernel import mako_kernel
 
 class Operator(BenchmarkOperator):
@@ -56,8 +56,8 @@ class Operator(BenchmarkOperator):
 
     @register_benchmark()
     def kernelllm_matmul(self, a: torch.Tensor, b: torch.Tensor):
-        kernelllm_matmul_object = BF16MatmulMako()
-        return lambda:kernelllm_matmul_object.forward(a,b)
+        kllm_matmul= KMatmul()
+        return lambda:kllm_matmul.forward(a,b)
 
     @register_benchmark()
     def mako_matmul(self, a: torch.Tensor, b: torch.Tensor):
