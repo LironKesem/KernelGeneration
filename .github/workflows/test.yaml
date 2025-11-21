@@ -13,9 +13,26 @@ jobs:
     runs-on: ubuntu-22.04
     strategy:
       matrix:
-        python-version: ['3.10']  
+        python-version: ['3.10']
 
     steps:
+      - name: Show memory and disk (start) (Debug)
+        run: |
+          echo "=== MEMORY ==="
+          free -h
+          echo "=== DISK ==="
+          df -h
+
+      - name: Free disk space
+        run: |
+          sudo rm -rf /usr/local/lib/android
+          sudo rm -rf /usr/share/dotnet
+          sudo rm -rf /opt/ghc
+          sudo rm -rf /opt/hostedtoolcache/CodeQL
+          sudo docker image prune -af
+          sudo apt-get clean
+          sudo rm -rf /var/lib/apt/lists/*
+
       - name: Checkout code
         uses: actions/checkout@v3
 
@@ -29,12 +46,28 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y build-essential cmake git wget python3-pip
 
+      - name: Show memory & disk (before PyTorch install) (Debug)
+        run: |
+          echo "=== MEMORY ==="
+          free -h
+          echo "=== DISK ==="
+          df -h
+
+      - name:  show repo tree (Debug)
+        run: ls -R .
 
       - name: Install Python dependencies & setup kernelGeneration (ROCm)
         run: |
-          pip download torch==2.1.0 torchvision==0.16.0 --index-url https://download.pytorch.org/whl/rocm6.4 -d whls/rocm
+          pip download torch torchvision --index-url https://download.pytorch.org/whl/nightly/rocm6.4 -d whls/rocm
           pip install --no-index --find-links=whls/rocm torch torchvision
-          python kernelGeneration/install.py
+          python install.py
+
+      - name: Show memory & disk (after PyTorch install) (Debug)
+        run: |
+          echo "=== MEMORY ==="
+          free -h
+          echo "=== DISK ==="
+          df -h
 
       - name: Run TritonBench test (ROCm)
         run: |
