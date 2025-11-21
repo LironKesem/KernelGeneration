@@ -100,10 +100,10 @@ def call(args):
         del buf1
     return buf2
 
-
-class BF16MatmulMako(nn.Module):
+# originally designed for (256, 256, 32)
+class KMatmul(nn.Module):
     def __init__(self):
-        super(BF16MatmulMako, self).__init__()
+        super(KMatmul, self).__init__()
     def forward(self, input_0, input_1):
         A = input_0
         B = input_1

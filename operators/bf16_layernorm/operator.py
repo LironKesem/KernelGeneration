@@ -8,7 +8,7 @@ import torch
 import triton
 import triton.language as tl
 
-from .kernels import layer_norm
+from .triton_kernel import layer_norm
 
 
 from tritonbench.utils.triton_op import (
@@ -19,8 +19,8 @@ from tritonbench.utils.triton_op import (
     register_metric,
     register_x_val
 )
-from .kernels import layer_norm
-from .kernelllm import KLLMLayerNorm
+from .triton_kernel import layer_norm
+from .kernelllm import KLayerNorm
 from .mako_kernel import mako_layernorm
 
 class Operator(BenchmarkOperator):
@@ -49,8 +49,8 @@ class Operator(BenchmarkOperator):
 
     @register_benchmark()
     def kernelllm_layernorm(self, x: torch.Tensor, weight: torch.Tensor, bias: torch.Tensor, eps: float = 1e-5):
-        kllm=KLLMLayerNorm()
-        return lambda: kllm(x, weight, bias)
+        kllm_layernorm=KLayerNorm()
+        return lambda: kllm_layernorm(x, weight, bias)
 
     @register_benchmark()
     def mako_layernorm(self, x: torch.Tensor, weight: torch.Tensor, bias: torch.Tensor, eps: float = 1e-5):

@@ -57,7 +57,7 @@ def triton_poi_fused_native_layer_norm_1(in_ptr0, in_ptr1, in_ptr2, in_ptr3,
     tl.store(out_ptr0 + x2, tmp8, None)
 
 
-def call_512_512(args):
+def call(args):
     weight, bias, x = args
     args.clear()
     N, D = x.shape
@@ -83,15 +83,15 @@ def call_512_512(args):
         del bias
     return buf4, x, buf0, buf3
 
-
-class KLLMLayerNorm(nn.Module):
+# originally designed for (512, 512)
+class KLayerNorm(nn.Module):
     def __init__(self):
 
-        super(KLLMLayerNorm, self).__init__()
+        super(KLayerNorm, self).__init__()
 
     def forward(self, input_0,weight,bias):
         weight = weight
         bias = bias
         x = input_0
-        output = call_512_512([weight, bias, x])
+        output = call([weight, bias, x])
         return output[0]
