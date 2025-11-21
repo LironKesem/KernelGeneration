@@ -8,7 +8,7 @@ import torch
 import triton
 import triton.language as tl
 
-from .kernels import layer_norm
+from .triton_kernel import layer_norm
 
 
 from tritonbench.utils.triton_op import (
