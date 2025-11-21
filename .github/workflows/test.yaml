@@ -1,0 +1,70 @@
+name: TritonBench Verification
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  cuda:
+    name: CUDA Verification
+    runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        python-version: [3.10]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install system dependencies (CUDA)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential cmake git wget python3-pip
+
+      - name: Install Python dependencies & setup kernelGeneration (CUDA)
+        run: | 
+          pip install --pre torch torchvision --index-url https://download.pytorch.org/whl/nightly/cu124
+          python kernelGeneration/install.py
+
+      - name: Run TritonBench test (CUDA)
+        run: |
+          python tritonbench/run.py --op bf16_layernorm
+
+  amd:
+    name: AMD Verification
+    runs-on: ubuntu-22.04
+    strategy:
+      matrix:
+        python-version: [3.10]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install system dependencies (ROCm)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential cmake git wget python3-pip
+
+
+      - name: Install Python dependencies & setup kernelGeneration (ROCm)
+        run: |
+          pip install --pre torch torchvision --index-url https://download.pytorch.org/whl/nightly/rocm6.4
+          python kernelGeneration/install.py
+
+      - name: Run TritonBench test (ROCm)
+        run: |
+          export TRITON_F32_DEFAULT=1
+          python tritonbench/run.py --op bf16_layernorm
