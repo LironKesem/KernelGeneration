@@ -32,7 +32,8 @@ jobs:
 
       - name: Install Python dependencies & setup kernelGeneration (ROCm)
         run: |
-          pip install --pre --no-cache-dir torch torchvision --index-url https://download.pytorch.org/whl/nightly/rocm6.4
+          pip download torch==2.1.0 torchvision==0.16.0 --index-url https://download.pytorch.org/whl/rocm6.4 -d whls/rocm
+          pip install --no-index --find-links=whls/rocm torch torchvision
           python kernelGeneration/install.py
 
       - name: Run TritonBench test (ROCm)
