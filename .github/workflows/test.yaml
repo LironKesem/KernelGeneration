@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-22.04
     strategy:
       matrix:
-        python-version: ["3.10"]
+        python-version: ['3.10']
 
     steps:
       - name: Checkout code
@@ -22,7 +22,7 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v4
         with:
-          python-version: ${{ matrix.python-version }}  
+          python-version: 3.10  
 
       - name: Install system dependencies (CUDA)
         run: |
@@ -31,7 +31,7 @@ jobs:
 
       - name: Install Python dependencies & setup kernelGeneration (CUDA)
         run: | 
-          pip install --pre torch torchvision --index-url https://download.pytorch.org/whl/nightly/cu124
+          pip3 install --pre torch torchvision --index-url https://download.pytorch.org/whl/nightly/cu126
           python kernelGeneration/install.py
 
       - name: Run TritonBench test (CUDA)
@@ -43,7 +43,7 @@ jobs:
     runs-on: ubuntu-22.04
     strategy:
       matrix:
-        python-version: [3.10]
+        python-version: ['3.10']  
 
     steps:
       - name: Checkout code
@@ -52,7 +52,7 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v4
         with:
-          python-version: ${{ matrix.python-version }}
+          python-version: 3.10
 
       - name: Install system dependencies (ROCm)
         run: |
