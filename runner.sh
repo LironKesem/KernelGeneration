@@ -17,8 +17,8 @@ echo "=== Running TritonBench (no Triton) ==="
 for op in "${ops[@]}"; do
     echo "Running op: $op"
     python tritonbench/run.py --op "$op" \
-        --output-json "results_a30/${op}_no_triton_a40.json" \
-        > "results_a30/${op}_no_triton_a40.txt"
+        --output-json "results_a30/${op}_no_triton_a30.json" \
+        > "results_a30/${op}_no_triton_a30.txt"
 done
 
 

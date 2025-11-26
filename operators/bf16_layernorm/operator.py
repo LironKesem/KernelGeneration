@@ -24,7 +24,7 @@ from .kernelllm import KLayerNorm
 from .mako_kernel import mako_layernorm
 
 class Operator(BenchmarkOperator):
-    DEFAULT_METRICS = ["latency", "accuracy", "best_config"]
+    DEFAULT_METRICS = ["latency", "accuracy", "best_config", "gbps"]
 
     class LayerNormWrapper:
         """Wrap Triton layer_norm to match BenchmarkOperator expected interface."""
@@ -77,10 +77,10 @@ class Operator(BenchmarkOperator):
 
     @register_metric()
     def gbps(self, fn, example_inputs, metrics: BenchmarkOperatorMetrics):
-        x, weight, bias = example_inputs
-        y = fn()
-        total_bytes = (x.numel() + weight.numel() + bias.numel()) * x.element_size()
-        return total_bytes / metrics.latency * 1e-9  # GB/s
+        # we only going to test the forward, 
+        x = example_inputs[0]
+        base = x.numel() * x.element_size() / metrics.latency * 1e-6
+        return 2* base
 
     @register_metric(x_only=True)
     def input_shape(self, fn_name: str, example_inputs, metrics: BenchmarkOperatorMetrics):
