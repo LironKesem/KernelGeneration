@@ -62,12 +62,18 @@ class Operator(BenchmarkOperator):
         return lambda: torch.nn.functional.layer_norm(x, x.shape[-1:], weight, bias, eps).to(torch.bfloat16)
 
     @register_benchmark()
-    def torch_compile_layernorm(self, x: torch.Tensor, weight: torch.Tensor, bias: torch.Tensor, eps: float = 1e-5):
-        @torch.compile(mode="max-autotune-no-cudagraphs")
+    def torch_compile_max_layernorm(self, x: torch.Tensor, weight: torch.Tensor, bias: torch.Tensor, eps: float = 1e-5):
+        @torch.compile(mode="max-autotune")
         def _inner():
             return torch.nn.functional.layer_norm(x, x.shape[-1:], weight, bias, eps).to(torch.bfloat16)
         return _inner
 
+    @register_benchmark()
+    def torch_compile_default_layernorm(self, x: torch.Tensor, weight: torch.Tensor, bias: torch.Tensor, eps: float = 1e-5):
+        @torch.compile(mode="default")
+        def _inner():
+            return torch.nn.functional.layer_norm(x, x.shape[-1:], weight, bias, eps).to(torch.bfloat16)
+        return _inner
     def accuracy(self, fn: Callable, baseline_fn: Callable) -> bool:
         output = fn()
         baseline_output = baseline_fn()

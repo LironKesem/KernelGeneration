@@ -12,7 +12,7 @@ from tritonbench.utils.triton_op import (
     register_x_val,
     register_x_val,
 )
-from .triton_kernel import matmul_kernel
+from .triton_kernel import triton_matmul_kernel
 from .kernelllm import KMatmul
 from .mako_kernel import mako_kernel
 
@@ -21,38 +21,7 @@ class Operator(BenchmarkOperator):
 
     @register_benchmark()
     def triton_matmul(self, a: torch.Tensor, b: torch.Tensor):
-        assert a.shape[1] == b.shape[0], "Incompatible dimensions"
-        assert a.is_contiguous(), "Matrix A must be contiguous"
-        assert (
-            a.dtype == torch.bfloat16 and b.dtype == torch.bfloat16
-        ), "Matrics must be of type bfloat16"
-        M, K = a.shape
-        K, N = b.shape
-        # Allocates output.
-        c = torch.empty((M, N), device=a.device, dtype=torch.bfloat16)
-        # 1D launch kernel where each block gets its own program.
-        grid = lambda META: (
-            triton.cdiv(M, META["BLOCK_SIZE_M"]) * triton.cdiv(N, META["BLOCK_SIZE_N"]),
-        )
-
-        def _inner():
-            matmul_kernel[grid](
-                a,
-                b,
-                c,  #
-                M,
-                N,
-                K,  #
-                a.stride(0),
-                a.stride(1),  #
-                b.stride(0),
-                b.stride(1),  #
-                c.stride(0),
-                c.stride(1),  #
-            )
-            return c
-
-        return _inner
+       return lambda: triton_matmul_kernel(a, b)
 
     @register_benchmark()
     def kernelllm_matmul(self, a: torch.Tensor, b: torch.Tensor):
@@ -68,11 +37,17 @@ class Operator(BenchmarkOperator):
         return lambda: torch.matmul(a, b)
 
     @register_benchmark()
-    def torch_compile_matmul(self, a: torch.Tensor, b: torch.Tensor):
-        @torch.compile(mode="max-autotune-no-cudagraphs")
+    def torch_compile_max_matmul(self, a: torch.Tensor, b: torch.Tensor):
+        @torch.compile(mode="max-autotune")
         def _inner(a, b):
             return torch.matmul(a, b)
+        return lambda: _inner(a, b)
 
+    @register_benchmark()
+    def torch_compile_default_matmul(self, a: torch.Tensor, b: torch.Tensor):
+        @torch.compile(mode="default")
+        def _inner(a, b):
+            return torch.matmul(a, b)
         return lambda: _inner(a, b)
 
     def accuracy(self, fn: Callable, baseline_fn: Callable) -> bool:
