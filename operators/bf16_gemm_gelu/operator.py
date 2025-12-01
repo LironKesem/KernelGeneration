@@ -39,10 +39,24 @@ class Operator(BenchmarkOperator):
         return lambda: kllm_gelu.forward(a, b, bias)
 
     @register_benchmark()
-    def torch_compile_gemm_gelu(
+    def torch_compile_max_gemm_gelu(
         self, a: torch.Tensor, b: torch.Tensor, bias: torch.Tensor
     ):
-        @torch.compile(mode="max-autotune-no-cudagraphs")
+        @torch.compile(mode="max-autotune")
+        def _inner(a, b, bias):
+            out = torch.matmul(a, b)
+            out = out + bias  # broadcast along dim 0
+            out = torch.nn.functional.gelu(out)
+            return out
+
+        return lambda: _inner(a, b, bias)
+
+
+    @register_benchmark()
+    def torch_compile_default_gemm_gelu(
+        self, a: torch.Tensor, b: torch.Tensor, bias: torch.Tensor
+    ):
+        @torch.compile(mode="default")
         def _inner(a, b, bias):
             out = torch.matmul(a, b)
             out = out + bias  # broadcast along dim 0
