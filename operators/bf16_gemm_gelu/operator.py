@@ -51,7 +51,6 @@ class Operator(BenchmarkOperator):
 
         return lambda: _inner(a, b, bias)
 
-    # TODO: inside the triton kernel we need to check how we can use triton erf function
     @register_benchmark()
     def triton_gemm_gelu_kernel(
         self, a: torch.Tensor, b: torch.Tensor, bias: torch.Tensor
