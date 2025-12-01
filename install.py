@@ -64,18 +64,10 @@ def main():
     else:
         print("No local ./operators directory found; not creating symlink.")
 
-    # Step 5: Clone custom Helion (kernel-gen-rh branch) and install editable
+    # Step 5: Clone Helion
     helion_dir = ROOT / "helion"
     if not helion_dir.exists():
-        # Clone only the needed branch
-        run(
-            "git clone -b kernel-gen-rh --single-branch https://github.com/fulvius31/helion helion"
-        )
-    else:
-        print("helion folder already exists, updating branch kernel-gen-rh...")
-        run("git fetch origin", cwd=str(helion_dir))
-        run("git checkout kernel-gen-rh", cwd=str(helion_dir))
-        run("git pull --ff-only", cwd=str(helion_dir))
+        run("git clone https://github.com/pytorch/helion helion")
 
     # Editable install
     run(f"{sys.executable} -m pip install -e helion")
