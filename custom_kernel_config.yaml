@@ -19,55 +19,103 @@ kernel_mappings:
 
 kernel_metric_mappings:
   bf16_gemm_gelu:
-    "torch_gemm_gelu": "baseline"
-    "triton_gemm_gelu-speedup": "triton_speedup"
-    "triton_gemm_gelu-accuracy": "triton_accuracy"
-    "triton_gemm_gelu-tflops": "triton_tflops"
-    "torch_compile_gemm_gelu-speedup": "torch_compile_speedup"
-    "torch_compile_gemm_gelu-accuracy": "torch_compile_accuracy"
-    "torch_compile_gemm_gelu-tflops": "torch_compile_tflops"
-    "kernelllm_gemm_gelu-speedup": "kernelllm_speedup"
+    # Baseline
+    "torch_gemm_gelu":  "baseline"
+
+    # Triton
+    "triton_gemm_gelu_kernel-speedup":  "triton_speedup"
+    "triton_gemm_gelu_kernel-accuracy": "triton_accuracy"
+    "triton_gemm_gelu_kernel-tflops": "triton_tflops"
+
+    # torch.compile
+    "torch_compile_max_gemm_gelu-speedup":  "torch_compile_speedup"
+    "torch_compile_max_gemm_gelu-accuracy": "torch_compile_accuracy"
+    "torch_compile_max_gemm_gelu-tflops": "torch_compile_tflops"
+
+    # torch.compile
+    "torch_compile_default_gemm_gelu-speedup":  "torch_compile_default_speedup"
+    "torch_compile_default_gemm_gelu-accuracy": "torch_compile_default_accuracy"
+    "torch_compile_default_gemm_gelu-tflops": "torch_compile_default_tflops"
+
+    # KernelLLM
+    "kernelllm_gemm_gelu-speedup":  "kernelllm_speedup"
     "kernelllm_gemm_gelu-accuracy": "kernelllm_accuracy"
     "kernelllm_gemm_gelu-tflops": "kernelllm_tflops"
+
+    # Mako
     "mako_gemm_gelu-speedup": "mako_speedup"
-    "mako_gemm_gelu-accuracy": "mako_accuracy"
-    "mako_gemm_gelu-tflops": "mako_tflops"
+    "mako_gemm_gelu-accuracy":  "mako_accuracy"
+    "mako_gemm_gelu-tflops":  "mako_tflops"
+
+    # Helion
     "helion_gemm_gelu_tritonbench-speedup": "helion_speedup"
-    "helion_gemm_gelu_tritonbench-accuracy": "helion_accuracy"
-    "helion_gemm_gelu_tritonbench-tflops": "helion_tflops"
+    "helion_gemm_gelu_tritonbench-accuracy":  "helion_accuracy"
+    "helion_gemm_gelu_tritonbench-tflops":  "helion_tflops"
 
   bf16_layernorm:
-    "torch_layernorm": "baseline"
-    "triton_layernorm-speedup": "triton_speedup"
-    "triton_layernorm-accuracy": "triton_accuracy"
-    "triton_layernorm-tflops": "triton_tflops"
-    "torch_compile_layernorm-speedup": "torch_compile_speedup"
-    "torch_compile_layernorm-accuracy": "torch_compile_accuracy"
-    "torch_compile_layernorm-gbps": "torch_compile_gbps"
-    "kernelllm_layernorm-speedup": "kernelllm_speedup"
+    # Baseline
+    "torch_layernorm":  "baseline"
+
+    # Triton
+    "triton_layernorm-latency": "triton_latency"
+    "triton_layernorm-accuracy":  "triton_accuracy"
+    "triton_layernorm-gbps":  "triton_gbps"
+
+    # KernelLLM
+    "kernelllm_layernorm-latency":  "kernelllm_latency"
     "kernelllm_layernorm-accuracy": "kernelllm_accuracy"
     "kernelllm_layernorm-gbps": "kernelllm_gbps"
-    "mako_layernorm-speedup": "mako_speedup"
-    "mako_layernorm-accuracy": "mako_accuracy"
-    "mako_layernorm-gbps": "mako_gbps"
-    "helion_layernorm_tritonbench-speedup": "helion_speedup"
-    "helion_layernorm_tritonbench-accuracy": "helion_accuracy"
-    "helion_layernorm_tritonbench-gbps": "helion_gbps"
+
+    # Mako
+    "mako_layernorm-latency": "mako_latency"
+    "mako_layernorm-accuracy":  "mako_accuracy"
+    "mako_layernorm-gbps":  "mako_gbps"
+
+    # torch.compile (max)
+    "torch_compile_max_layernorm-latency":  "torch_compile_max_latency"
+    "torch_compile_max_layernorm-accuracy": "torch_compile_max_accuracy"
+    "torch_compile_max_layernorm-gbps": "torch_compile_max_gbps"
+
+    # torch.compile (default)
+    "torch_compile_default_layernorm-latency":  "torch_compile_latency"
+    "torch_compile_default_layernorm-accuracy": "torch_compile_accuracy"
+    "torch_compile_default_layernorm-gbps": "torch_compile_gbps"
+
+    # Helion
+    "helion_layer_norm_tritonbench-latency":  "helion_latency"
+    "helion_layer_norm_tritonbench-accuracy": "helion_accuracy"
+    "helion_layer_norm_tritonbench-gbps": "helion_gbps"
 
   bf16_matmul:
+    # Baseline
     "torch_matmul": "baseline"
+    
+    # Triton
     "triton_matmul-speedup": "triton_speedup"
     "triton_matmul-accuracy": "triton_accuracy"
     "triton_matmul-tflops": "triton_tflops"
-    "torch_compile_matmul-speedup": "torch_compile_speedup"
-    "torch_compile_matmul-accuracy": "torch_compile_accuracy"
-    "torch_compile_matmul-tflops": "torch_compile_tflops"
+
+    # torch.compile (max-autotune)
+    "torch_compile_max_matmul-speedup": "torch_compile_speedup"
+    "torch_compile_max_matmul-accuracy": "torch_compile_accuracy"
+    "torch_compile_max_matmul-tflops": "torch_compile_tflops"
+
+    # torch.compile (default)
+    "torch_compile_default_matmul-speedup": "torch_compile_default_speedup"
+    "torch_compile_default_matmul-accuracy": "torch_compile_default_accuracy"
+    "torch_compile_default_matmul-tflops": "torch_compile_default_tflops"
+
+    # KernelLLM
     "kernelllm_matmul-speedup": "kernelllm_speedup"
     "kernelllm_matmul-accuracy": "kernelllm_accuracy"
     "kernelllm_matmul-tflops": "kernelllm_tflops"
+
+    # Mako
     "mako_matmul-speedup": "mako_speedup"
     "mako_matmul-accuracy": "mako_accuracy"
     "mako_matmul-tflops": "mako_tflops"
+
+    # Helion
     "helion_matmul_tritonbench-speedup": "helion_speedup"
     "helion_matmul_tritonbench-accuracy": "helion_accuracy"
     "helion_matmul_tritonbench-tflops": "helion_tflops"
