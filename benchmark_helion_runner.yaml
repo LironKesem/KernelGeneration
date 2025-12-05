@@ -1,7 +1,7 @@
-#bf16_layernorm:
-#  args: "--device=cuda --precision bf16 --kernel-config ../custom_kernel_config.yaml --kernel bf16_layernorm --output benchmark_bf16_layernorm.json"
-#  runner: helion
-#
+bf16_layernorm:
+  args: "--device=cuda --precision bf16 --kernel-config ../custom_kernel_config.yaml --kernel bf16_layernorm --output benchmark_bf16_layernorm.json"
+  runner: helion
+
 bf16_matmul:
   args: "--device=cuda --precision bf16 --kernel-config ../custom_kernel_config.yaml --kernel bf16_matmul --output benchmark_bf16_matmul.json"
   runner: helion
