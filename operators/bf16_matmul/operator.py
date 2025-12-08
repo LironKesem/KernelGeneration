@@ -53,7 +53,7 @@ class Operator(BenchmarkOperator):
     def accuracy(self, fn: Callable, baseline_fn: Callable) -> bool:
         output = fn()
         baseline_output = baseline_fn()
-        result = torch.allclose(output, baseline_output, atol=1e-2, rtol=1e-2)
+        result = torch.allclose(output, baseline_output, atol=1e-5, rtol=1e-2)
         assert result, "Outputs are not close!"
         return result
 
