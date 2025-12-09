@@ -6,8 +6,8 @@ import logging
 import os
 import re
 import shutil
-import sys
 import tempfile
+from datetime import datetime
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple
@@ -191,12 +191,15 @@ def _extract_output_arg(args: List[str]) -> Optional[str]:
     return None
 
 
-def post_process_results(output_filename: str) -> Tuple[bool, Optional[Path]]:
+def post_process_results(
+    output_filename: str, run_datetime: str
+) -> Tuple[bool, Optional[Path]]:
     """
-    Process benchmark results: inject keys and move to current directory.
+    Process benchmark results: inject keys and move to results/<device>_<run_datetime>.
 
     Args:
         output_filename: Name of the output file to process.
+        run_datetime: Run identifier (e.g., '20251209_081530') used in the folder name.
 
     Returns:
         Tuple of (success: bool, destination_path: Optional[Path])
@@ -240,7 +243,15 @@ def post_process_results(output_filename: str) -> Tuple[bool, Optional[Path]]:
     else:
         new_filename = source_path.name
 
-    dest_path = Path.cwd() / new_filename
+    # results/devicename_datetime
+    output_dir = Path.cwd() / "results" / f"{device_name}_{run_datetime}"
+    try:
+        output_dir.mkdir(parents=True, exist_ok=True)
+    except OSError as e:
+        logger.error(f"Failed to create results directory {output_dir}: {e}")
+        return False, None
+
+    dest_path = output_dir / new_filename
 
     # Move to destination
     try:
@@ -302,8 +313,9 @@ def run(args: Optional[List[str]] = None) -> None:
     Main entry point: run benchmarks and post-process results.
 
     Args:
-        args: Command-line arguments. Uses sys.argv[1:] if None.
+        args: Command-line arguments.
     """
+    run_datetime = datetime.now().strftime("%Y%m%d_%H%M%S")
     expected_outputs: Dict[str, str] = {}
 
     check_helion_path = os.environ.get("TRITONBENCH_HELION_PATH")
@@ -346,7 +358,7 @@ def run(args: Optional[List[str]] = None) -> None:
         logger.info(
             f"Processing output for benchmark '{benchmark_name}': {output_file}"
         )
-        success, dest_path = post_process_results(output_file)
+        success, dest_path = post_process_results(output_file, run_datetime)
         results[benchmark_name] = (success, dest_path)
 
     # Print summary
