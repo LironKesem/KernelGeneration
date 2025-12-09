@@ -320,7 +320,7 @@ def run(args: Optional[List[str]] = None) -> None:
 
     check_helion_path = os.environ.get("TRITONBENCH_HELION_PATH")
     if not check_helion_path:
-        logger.error(f"You must set TRITONBENCH_HELION_PATH first")
+        logger.error("You must set TRITONBENCH_HELION_PATH first")
         return
 
     config_path = os.environ.get("TRITONBENCH_RUN_CONFIG")
