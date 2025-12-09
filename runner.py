@@ -143,20 +143,32 @@ def clear_inductor_cache() -> None:
 def _write_json_atomic(path: Path, data: dict) -> None:
     """Write JSON data atomically using a temporary file."""
     parent_dir = path.parent
+    tmp_name: Optional[str] = None
+
     with tempfile.NamedTemporaryFile(
         mode="w",
         dir=parent_dir,
         suffix=".tmp",
         delete=False,
     ) as tmp_file:
+        tmp_name = tmp_file.name
         try:
             json.dump(data, tmp_file, indent=2)
             tmp_file.flush()
             os.fsync(tmp_file.fileno())
         except Exception:
-            os.unlink(tmp_file.name)
+            if tmp_name and os.path.exists(tmp_name):
+                os.unlink(tmp_name)
             raise
-        shutil.move(tmp_file.name, path)
+
+    try:
+        assert tmp_name is not None
+        shutil.move(tmp_name, path)
+    except Exception:
+        # Clean up temp file if move fails
+        if tmp_name and os.path.exists(tmp_name):
+            os.unlink(tmp_name)
+        raise
 
 
 def _find_output_file(filename: str) -> Optional[Path]:
@@ -223,11 +235,10 @@ def post_process_results(
         logger.error(f"Failed to read {source_path}: {e}")
         return False, None
 
-    # Inject keys into each record's extra_info
     if isinstance(data, list):
         for record in data:
             benchmark = record.get("benchmark")
-            if benchmark is not None:
+            if isinstance(benchmark, dict):
                 extra_info = benchmark.setdefault("extra_info", {})
                 extra_info.update(keys.to_dict())
 
