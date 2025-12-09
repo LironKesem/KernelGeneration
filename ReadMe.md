@@ -72,5 +72,7 @@ kernelGen/
    ```
 4. Run the benchmark:
    ```bash
-   python tritonbench/run.py 
+   python runner.py 
    ```
+5. Check the results:
+You can check the benchmark results under ./results 
