@@ -329,7 +329,7 @@ def run(args: Optional[List[str]] = None) -> None:
         config_outputs = extract_outputs_from_config(config_path)
         expected_outputs.update(config_outputs)
     else:
-        logger.error(f"You must set TRITONBENCH_RUN_CONFIG first")
+        logger.error("You must set TRITONBENCH_RUN_CONFIG first")
         return
 
     if expected_outputs:
