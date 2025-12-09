@@ -306,18 +306,19 @@ def run(args: Optional[List[str]] = None) -> None:
     """
     expected_outputs: Dict[str, str] = {}
 
-    # Check env var for config file
+    check_helion_path = os.environ.get("TRITONBENCH_HELION_PATH")
+    if not check_helion_path:
+        logger.error(f"You must set TRITONBENCH_HELION_PATH first")
+        return
+
     config_path = os.environ.get("TRITONBENCH_RUN_CONFIG")
     if config_path:
         logger.info(f"Using config from TRITONBENCH_RUN_CONFIG: {config_path}")
         config_outputs = extract_outputs_from_config(config_path)
         expected_outputs.update(config_outputs)
-
-    # Check direct CLI arguments
-    current_args = args if args is not None else sys.argv[1:]
-    cli_output = _extract_output_arg(current_args)
-    if cli_output:
-        expected_outputs["cli"] = cli_output
+    else:
+        logger.error(f"You must set TRITONBENCH_RUN_CONFIG first")
+        return
 
     if expected_outputs:
         logger.info(f"Expecting {len(expected_outputs)} output file(s):")
