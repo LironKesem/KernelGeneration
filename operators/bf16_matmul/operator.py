@@ -1,8 +1,6 @@
 from typing import Callable, Generator, List, Tuple
 
 import torch
-import triton
-
 
 from tritonbench.utils.triton_op import (
     BenchmarkOperator,
@@ -15,18 +13,20 @@ from tritonbench.utils.triton_op import (
 from .triton_kernel import triton_matmul_kernel
 from .kernelllm import KMatmul
 from .mako_kernel import mako_kernel
+import torch._inductor.config as inductor_config
+
 
 class Operator(BenchmarkOperator):
     DEFAULT_METRICS = ["latency", "accuracy", "speedup", "tflops"]
 
     @register_benchmark()
     def triton_matmul(self, a: torch.Tensor, b: torch.Tensor):
-       return lambda: triton_matmul_kernel(a, b)
+        return lambda: triton_matmul_kernel(a, b)
 
     @register_benchmark()
     def kernelllm_matmul(self, a: torch.Tensor, b: torch.Tensor):
-        kllm_matmul= KMatmul()
-        return lambda:kllm_matmul.forward(a,b)
+        kllm_matmul = KMatmul()
+        return lambda: kllm_matmul.forward(a, b)
 
     @register_benchmark()
     def mako_matmul(self, a: torch.Tensor, b: torch.Tensor):
@@ -38,17 +38,28 @@ class Operator(BenchmarkOperator):
 
     @register_benchmark()
     def torch_compile_max_matmul(self, a: torch.Tensor, b: torch.Tensor):
-        @torch.compile(mode="max-autotune")
-        def _inner(a, b):
-            return torch.matmul(a, b)
-        return lambda: _inner(a, b)
+        torch._dynamo.reset()
+        with inductor_config.patch(
+            max_autotune=True,
+            max_autotune_gemm_backends="TRITON",
+        ):
+            f = lambda a, b: a.matmul(b)
+            compiled = torch.compile(f, dynamic=False)
+            compiled(a, b)
+
+        return lambda: compiled(a, b)
 
     @register_benchmark()
     def torch_compile_default_matmul(self, a: torch.Tensor, b: torch.Tensor):
-        @torch.compile(mode="default")
-        def _inner(a, b):
-            return torch.matmul(a, b)
-        return lambda: _inner(a, b)
+        torch._dynamo.reset()
+        with inductor_config.patch(
+            max_autotune_gemm_backends="TRITON",
+        ):
+            f = lambda a, b: a.matmul(b)
+            compiled = torch.compile(f, dynamic=False)
+            compiled(a, b)
+
+        return lambda: compiled(a, b)
 
     def accuracy(self, fn: Callable, baseline_fn: Callable) -> bool:
         output = fn()
@@ -72,17 +83,17 @@ class Operator(BenchmarkOperator):
         for attr in ("p50", "min", "max"):
             v = getattr(lat, attr, None)
             if isinstance(v, (int, float)):
-                return float(v) / (1e3) # convert ms -> s
+                return float(v) / (1e3)  # convert ms -> s
 
         times = getattr(lat, "times", None)
         if isinstance(times, (list, tuple)) and times:
             # median
             s = sorted(float(t) for t in times)
             n = len(s)
-            if n%2 == 1 :
+            if n % 2 == 1:
                 median = s[n // 2]
             else:
-                median =(s[n //2 -1] + s[n//2]) /2 
+                median = (s[n // 2 - 1] + s[n // 2]) / 2
             return median / (1e3)  # convert ms -> s
 
         raise TypeError(
@@ -129,7 +140,7 @@ class Operator(BenchmarkOperator):
             (3712, 3840, 3968),
             (3840, 3968, 4096),
             (3968, 4096, 4224),
-            (4096, 4224, 4352)
+            (4096, 4224, 4352),
         ]
 
     def get_input_iter(self) -> Generator:
@@ -138,7 +149,7 @@ class Operator(BenchmarkOperator):
             x = torch.rand((M, K), device=self.device, dtype=torch.bfloat16)
             y = torch.rand((K, N), device=self.device, dtype=torch.bfloat16)
             yield x, y
-    
+
     @register_x_val(label="(M, K, N)")
     def get_x_val(self, example_inputs) -> Tuple[int, int, int]:
         a, w = example_inputs
