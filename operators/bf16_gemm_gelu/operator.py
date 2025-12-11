@@ -3,6 +3,7 @@ from typing import Callable, Generator, List, Tuple
 import torch
 import triton
 
+import torch._inductor.config as inductor_config
 from tritonbench.utils.triton_op import (
     BenchmarkOperator,
     BenchmarkOperatorMetrics,
@@ -30,8 +31,8 @@ class Operator(BenchmarkOperator):
 
     @register_benchmark()
     def mako_gemm_gelu(self, a: torch.Tensor, b: torch.Tensor, bias: torch.Tensor):
-            mako_gelu = MakoFusGelu()
-            return lambda:mako_gelu(a, b, bias)
+        mako_gelu = MakoFusGelu()
+        return lambda: mako_gelu(a, b, bias)
 
     @register_benchmark()
     def kernelllm_gemm_gelu(self, a: torch.Tensor, b: torch.Tensor, bias: torch.Tensor):
@@ -42,28 +43,44 @@ class Operator(BenchmarkOperator):
     def torch_compile_max_gemm_gelu(
         self, a: torch.Tensor, b: torch.Tensor, bias: torch.Tensor
     ):
-        @torch.compile(mode="max-autotune")
-        def _inner(a, b, bias):
-            out = torch.matmul(a, b)
-            out = out + bias  # broadcast along dim 0
-            out = torch.nn.functional.gelu(out)
-            return out
+        torch._dynamo.reset()
+        with inductor_config.patch(
+            max_autotune=True,
+            max_autotune_gemm_backends="TRITON",
+        ):
 
-        return lambda: _inner(a, b, bias)
+            def f(a, b, bias):
+                out = a.matmul(b)
+                out = out + bias  # broadcast along dim 0
+                out = torch.nn.functional.gelu(out)
+                return out
 
+            compiled = torch.compile(f, dynamic=False)
+            # Force compilation & autotune before timing
+            compiled(a, b, bias)
+
+        return lambda: compiled(a, b, bias)
 
     @register_benchmark()
     def torch_compile_default_gemm_gelu(
         self, a: torch.Tensor, b: torch.Tensor, bias: torch.Tensor
     ):
-        @torch.compile(mode="default")
-        def _inner(a, b, bias):
-            out = torch.matmul(a, b)
-            out = out + bias  # broadcast along dim 0
-            out = torch.nn.functional.gelu(out)
-            return out
+        torch._dynamo.reset()
+        with inductor_config.patch(
+            max_autotune_gemm_backends="TRITON",
+        ):
 
-        return lambda: _inner(a, b, bias)
+            def f(a, b, bias):
+                out = a.matmul(b)
+                out = out + bias  # broadcast along dim 0
+                out = torch.nn.functional.gelu(out)
+                return out
+
+            compiled = torch.compile(f, dynamic=False)
+            # Force compilation & autotune before timing
+            compiled(a, b, bias)
+
+        return lambda: compiled(a, b, bias)
 
     @register_benchmark()
     def triton_gemm_gelu_kernel(
@@ -131,17 +148,17 @@ class Operator(BenchmarkOperator):
         for attr in ("p50", "min", "max"):
             v = getattr(lat, attr, None)
             if isinstance(v, (int, float)):
-                return float(v) / (1e3) # convert ms -> s
+                return float(v) / (1e3)  # convert ms -> s
 
         times = getattr(lat, "times", None)
         if isinstance(times, (list, tuple)) and times:
             # median
             s = sorted(float(t) for t in times)
             n = len(s)
-            if n%2 == 1 :
+            if n % 2 == 1:
                 median = s[n // 2]
             else:
-                median =(s[n //2 -1] + s[n//2]) /2 
+                median = (s[n // 2 - 1] + s[n // 2]) / 2
             return median / (1e3)  # convert ms -> s
 
         raise TypeError(
@@ -170,7 +187,13 @@ class Operator(BenchmarkOperator):
         return total_flops / max(sec, 1e-12) / 1e12  # TFLOPs
 
     def generate_sizes(self) -> List[Tuple[int, int, int]]:
-        return [(32, 64, 16),(128, 256, 64),(512, 1024, 128), (1024, 2048, 256),(512, 2048, 4096)]
+        return [
+            (32, 64, 16),
+            (128, 256, 64),
+            (512, 1024, 128),
+            (1024, 2048, 256),
+            (512, 2048, 4096),
+        ]
 
     def get_input_iter(self) -> Generator:
         for size in self.generate_sizes():
