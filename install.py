@@ -46,9 +46,7 @@ def main():
     run("git submodule update --init --recursive", cwd=str(ROOT / "tritonbench"))
 
     # Step 3: Install TritonBench
-    run(f"{sys.executable} install.py", cwd=str(ROOT / "tritonbench"))
-
-    # For some reason, the installer script of tritonbench has some issue, so we need to install also using pip
+    run(f"{sys.executable} -m pip install -r requirements.txt", cwd=str(ROOT / "tritonbench"))
     run(f"{sys.executable} -m pip install -e .", cwd=str(ROOT / "tritonbench"))
     # Step 4: Copy the operators from ./operators into tritonbench/tritonbench/operators/<name>
     source_dir = ROOT / "operators"
