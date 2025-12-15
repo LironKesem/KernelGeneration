@@ -66,7 +66,7 @@ def call(args):
     assert_size_stride(x, (N, D), (D, 1))
     with torch.cuda._DeviceGuard(0):
         torch.cuda.set_device(0)
-        buf0 = empty_strided_cuda((N, 1), (1, 1), torch.bfloat16)
+        buf0 = empty_strided_cuda((N, 1), (1, 1), torch.float32)
         buf1 = empty_strided_cuda((N, 1), (1, D), torch.bfloat16)
         buf3 = reinterpret_tensor(buf1, (N, 1), (1, D), 0)
         del buf1

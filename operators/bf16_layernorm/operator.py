@@ -121,9 +121,9 @@ class Operator(BenchmarkOperator):
     def accuracy(self, fn: Callable, baseline_fn: Callable) -> bool:
         output = fn()
         baseline_output = baseline_fn()
-        # atol=1e-5 do not pass for kernelllm, does we decided to loosen the tolerance
-        result = torch.allclose(output, baseline_output, atol=1e-2, rtol=1e-2)
-        assert result, "Outputs are not close!"
+        result = torch.allclose(output, baseline_output, atol=1e-5, rtol=1e-2)
+        if not result:
+            print("Accuracy check failed!")
         return result
 
     @register_metric()
@@ -147,7 +147,11 @@ class Operator(BenchmarkOperator):
         eps = 1e-5
         for size in self.generate_sizes():
             normalized_shape = size[-1]
-            x = torch.randn(size, device="cuda", dtype=torch.bfloat16)
+            x = -2.3 + 0.5 * torch.randn(
+                size,
+                dtype=self.dtype,
+                device=self.device,
+            )
             x.requires_grad_(True)
 
             weight = torch.ones(

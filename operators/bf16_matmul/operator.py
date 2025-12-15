@@ -65,7 +65,8 @@ class Operator(BenchmarkOperator):
         output = fn()
         baseline_output = baseline_fn()
         result = torch.allclose(output, baseline_output, atol=1e-5, rtol=1e-2)
-        assert result, "Outputs are not close!"
+        if not result:
+            print("Accuracy check failed!")
         return result
 
     @register_metric()
