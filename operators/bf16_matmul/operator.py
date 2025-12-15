@@ -145,10 +145,11 @@ class Operator(BenchmarkOperator):
         ]
 
     def get_input_iter(self) -> Generator:
+        assert self.dtype == torch.bfloat16, "Only bf16 is supported"
         for size in self.generate_sizes():
             M, K, N = size
-            x = torch.rand((M, K), device=self.device, dtype=torch.bfloat16)
-            y = torch.rand((K, N), device=self.device, dtype=torch.bfloat16)
+            x = torch.rand((M, K), device=self.device, dtype=self.dtype)
+            y = torch.rand((K, N), device=self.device, dtype=self.dtype)
             yield x, y
 
     @register_x_val(label="(M, K, N)")

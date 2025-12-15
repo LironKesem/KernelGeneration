@@ -143,7 +143,7 @@ class Operator(BenchmarkOperator):
         return [(512, 512), (32, 1024), (2048, 2048)]
 
     def get_input_iter(self) -> Generator:
-        dtype = torch.bfloat16
+        assert self.dtype == torch.bfloat16, "Only bf16 is supported"
         eps = 1e-5
         for size in self.generate_sizes():
             normalized_shape = size[-1]
@@ -155,10 +155,10 @@ class Operator(BenchmarkOperator):
             x.requires_grad_(True)
 
             weight = torch.ones(
-                normalized_shape, device=self.device, dtype=dtype, requires_grad=True
+                normalized_shape, device=self.device, dtype=self.dtype, requires_grad=True
             )
             bias = torch.zeros(
-                normalized_shape, device=self.device, dtype=dtype, requires_grad=True
+                normalized_shape, device=self.device, dtype=self.dtype, requires_grad=True
             )
             yield x, weight, bias, eps
 
