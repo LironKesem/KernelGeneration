@@ -1,0 +1,452 @@
+[
+  {
+    "benchmark": {
+      "name": "Helion Benchmark",
+      "extra_info": {
+        "device": "AMD Instinct MI300X VF gfx942:sramecc+:xnack-",
+        "helion_key": "19ee29773a160c2d941c34d71f9d4b6196ed0fdfa962c1e0aa3e66088d1175af",
+        "torch_key": "1454bc274b3451f386427b8af52434a66b128aec2b9c73c2aafb3bd11344185d",
+        "triton_key": "83044be5c64e73866ddc28f91b98c71258b7febcf343384d498750455c47ec3d",
+        "triton_version": "3.5.1"
+      }
+    },
+    "model": {
+      "name": "bf16_gemm_gelu"
+    },
+    "metric": {
+      "name": "mako_accuracy",
+      "benchmark_values": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    }
+  },
+  {
+    "benchmark": {
+      "name": "Helion Benchmark",
+      "extra_info": {
+        "device": "AMD Instinct MI300X VF gfx942:sramecc+:xnack-",
+        "helion_key": "19ee29773a160c2d941c34d71f9d4b6196ed0fdfa962c1e0aa3e66088d1175af",
+        "torch_key": "1454bc274b3451f386427b8af52434a66b128aec2b9c73c2aafb3bd11344185d",
+        "triton_key": "83044be5c64e73866ddc28f91b98c71258b7febcf343384d498750455c47ec3d",
+        "triton_version": "3.5.1"
+      }
+    },
+    "model": {
+      "name": "bf16_gemm_gelu"
+    },
+    "metric": {
+      "name": "mako_speedup",
+      "benchmark_values": [
+        0.2259304464956311,
+        0.21677766819628072,
+        0.25943220956696417,
+        0.36758513973471685,
+        0.6640558451045593
+      ]
+    }
+  },
+  {
+    "benchmark": {
+      "name": "Helion Benchmark",
+      "extra_info": {
+        "device": "AMD Instinct MI300X VF gfx942:sramecc+:xnack-",
+        "helion_key": "19ee29773a160c2d941c34d71f9d4b6196ed0fdfa962c1e0aa3e66088d1175af",
+        "torch_key": "1454bc274b3451f386427b8af52434a66b128aec2b9c73c2aafb3bd11344185d",
+        "triton_key": "83044be5c64e73866ddc28f91b98c71258b7febcf343384d498750455c47ec3d",
+        "triton_version": "3.5.1"
+      }
+    },
+    "model": {
+      "name": "bf16_gemm_gelu"
+    },
+    "metric": {
+      "name": "mako_tflops",
+      "benchmark_values": [
+        0.0009915545124351548,
+        0.06469212599208782,
+        2.1080692571777706,
+        16.70711240426108,
+        120.72290529773407
+      ]
+    }
+  },
+  {
+    "benchmark": {
+      "name": "Helion Benchmark",
+      "extra_info": {
+        "device": "AMD Instinct MI300X VF gfx942:sramecc+:xnack-",
+        "helion_key": "19ee29773a160c2d941c34d71f9d4b6196ed0fdfa962c1e0aa3e66088d1175af",
+        "torch_key": "1454bc274b3451f386427b8af52434a66b128aec2b9c73c2aafb3bd11344185d",
+        "triton_key": "83044be5c64e73866ddc28f91b98c71258b7febcf343384d498750455c47ec3d",
+        "triton_version": "3.5.1"
+      }
+    },
+    "model": {
+      "name": "bf16_gemm_gelu"
+    },
+    "metric": {
+      "name": "kernelllm_accuracy",
+      "benchmark_values": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    }
+  },
+  {
+    "benchmark": {
+      "name": "Helion Benchmark",
+      "extra_info": {
+        "device": "AMD Instinct MI300X VF gfx942:sramecc+:xnack-",
+        "helion_key": "19ee29773a160c2d941c34d71f9d4b6196ed0fdfa962c1e0aa3e66088d1175af",
+        "torch_key": "1454bc274b3451f386427b8af52434a66b128aec2b9c73c2aafb3bd11344185d",
+        "triton_key": "83044be5c64e73866ddc28f91b98c71258b7febcf343384d498750455c47ec3d",
+        "triton_version": "3.5.1"
+      }
+    },
+    "model": {
+      "name": "bf16_gemm_gelu"
+    },
+    "metric": {
+      "name": "kernelllm_speedup",
+      "benchmark_values": [
+        0.4099772836622697,
+        0.3440234615715265,
+        0.3967413551576636,
+        0.5651176828596416,
+        1.182374891891537
+      ]
+    }
+  },
+  {
+    "benchmark": {
+      "name": "Helion Benchmark",
+      "extra_info": {
+        "device": "AMD Instinct MI300X VF gfx942:sramecc+:xnack-",
+        "helion_key": "19ee29773a160c2d941c34d71f9d4b6196ed0fdfa962c1e0aa3e66088d1175af",
+        "torch_key": "1454bc274b3451f386427b8af52434a66b128aec2b9c73c2aafb3bd11344185d",
+        "triton_key": "83044be5c64e73866ddc28f91b98c71258b7febcf343384d498750455c47ec3d",
+        "triton_version": "3.5.1"
+      }
+    },
+    "model": {
+      "name": "bf16_gemm_gelu"
+    },
+    "metric": {
+      "name": "kernelllm_tflops",
+      "benchmark_values": [
+        0.001799291914465773,
+        0.10266559883865944,
+        3.223802685313979,
+        25.685164139076562,
+        214.9513977665018
+      ]
+    }
+  },
+  {
+    "benchmark": {
+      "name": "Helion Benchmark",
+      "extra_info": {
+        "device": "AMD Instinct MI300X VF gfx942:sramecc+:xnack-",
+        "helion_key": "19ee29773a160c2d941c34d71f9d4b6196ed0fdfa962c1e0aa3e66088d1175af",
+        "torch_key": "1454bc274b3451f386427b8af52434a66b128aec2b9c73c2aafb3bd11344185d",
+        "triton_key": "83044be5c64e73866ddc28f91b98c71258b7febcf343384d498750455c47ec3d",
+        "triton_version": "3.5.1"
+      }
+    },
+    "model": {
+      "name": "bf16_gemm_gelu"
+    },
+    "metric": {
+      "name": "torch_compile_accuracy",
+      "benchmark_values": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    }
+  },
+  {
+    "benchmark": {
+      "name": "Helion Benchmark",
+      "extra_info": {
+        "device": "AMD Instinct MI300X VF gfx942:sramecc+:xnack-",
+        "helion_key": "19ee29773a160c2d941c34d71f9d4b6196ed0fdfa962c1e0aa3e66088d1175af",
+        "torch_key": "1454bc274b3451f386427b8af52434a66b128aec2b9c73c2aafb3bd11344185d",
+        "triton_key": "83044be5c64e73866ddc28f91b98c71258b7febcf343384d498750455c47ec3d",
+        "triton_version": "3.5.1"
+      }
+    },
+    "model": {
+      "name": "bf16_gemm_gelu"
+    },
+    "metric": {
+      "name": "torch_compile_speedup",
+      "benchmark_values": [
+        0.2829063621191274,
+        0.24180055932988062,
+        0.276261367509011,
+        0.39836633077880373,
+        0.850756252642044
+      ]
+    }
+  },
+  {
+    "benchmark": {
+      "name": "Helion Benchmark",
+      "extra_info": {
+        "device": "AMD Instinct MI300X VF gfx942:sramecc+:xnack-",
+        "helion_key": "19ee29773a160c2d941c34d71f9d4b6196ed0fdfa962c1e0aa3e66088d1175af",
+        "torch_key": "1454bc274b3451f386427b8af52434a66b128aec2b9c73c2aafb3bd11344185d",
+        "triton_key": "83044be5c64e73866ddc28f91b98c71258b7febcf343384d498750455c47ec3d",
+        "triton_version": "3.5.1"
+      }
+    },
+    "model": {
+      "name": "bf16_gemm_gelu"
+    },
+    "metric": {
+      "name": "torch_compile_tflops",
+      "benchmark_values": [
+        0.0012416081334184375,
+        0.07215961117804075,
+        2.244818007616412,
+        18.1061483366759,
+        154.66435131368962
+      ]
+    }
+  },
+  {
+    "benchmark": {
+      "name": "Helion Benchmark",
+      "extra_info": {
+        "device": "AMD Instinct MI300X VF gfx942:sramecc+:xnack-",
+        "helion_key": "19ee29773a160c2d941c34d71f9d4b6196ed0fdfa962c1e0aa3e66088d1175af",
+        "torch_key": "1454bc274b3451f386427b8af52434a66b128aec2b9c73c2aafb3bd11344185d",
+        "triton_key": "83044be5c64e73866ddc28f91b98c71258b7febcf343384d498750455c47ec3d",
+        "triton_version": "3.5.1"
+      }
+    },
+    "model": {
+      "name": "bf16_gemm_gelu"
+    },
+    "metric": {
+      "name": "torch_compile_default_accuracy",
+      "benchmark_values": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    }
+  },
+  {
+    "benchmark": {
+      "name": "Helion Benchmark",
+      "extra_info": {
+        "device": "AMD Instinct MI300X VF gfx942:sramecc+:xnack-",
+        "helion_key": "19ee29773a160c2d941c34d71f9d4b6196ed0fdfa962c1e0aa3e66088d1175af",
+        "torch_key": "1454bc274b3451f386427b8af52434a66b128aec2b9c73c2aafb3bd11344185d",
+        "triton_key": "83044be5c64e73866ddc28f91b98c71258b7febcf343384d498750455c47ec3d",
+        "triton_version": "3.5.1"
+      }
+    },
+    "model": {
+      "name": "bf16_gemm_gelu"
+    },
+    "metric": {
+      "name": "torch_compile_default_speedup",
+      "benchmark_values": [
+        0.1789268481829002,
+        0.15931388620505998,
+        0.1827472954167736,
+        0.2633847076926472,
+        0.5332161438487277
+      ]
+    }
+  },
+  {
+    "benchmark": {
+      "name": "Helion Benchmark",
+      "extra_info": {
+        "device": "AMD Instinct MI300X VF gfx942:sramecc+:xnack-",
+        "helion_key": "19ee29773a160c2d941c34d71f9d4b6196ed0fdfa962c1e0aa3e66088d1175af",
+        "torch_key": "1454bc274b3451f386427b8af52434a66b128aec2b9c73c2aafb3bd11344185d",
+        "triton_key": "83044be5c64e73866ddc28f91b98c71258b7febcf343384d498750455c47ec3d",
+        "triton_version": "3.5.1"
+      }
+    },
+    "model": {
+      "name": "bf16_gemm_gelu"
+    },
+    "metric": {
+      "name": "torch_compile_default_tflops",
+      "benchmark_values": [
+        0.0007852669990407217,
+        0.04754343048535343,
+        1.4849503688979917,
+        11.971098505669286,
+        96.93672981213994
+      ]
+    }
+  },
+  {
+    "benchmark": {
+      "name": "Helion Benchmark",
+      "extra_info": {
+        "device": "AMD Instinct MI300X VF gfx942:sramecc+:xnack-",
+        "helion_key": "19ee29773a160c2d941c34d71f9d4b6196ed0fdfa962c1e0aa3e66088d1175af",
+        "torch_key": "1454bc274b3451f386427b8af52434a66b128aec2b9c73c2aafb3bd11344185d",
+        "triton_key": "83044be5c64e73866ddc28f91b98c71258b7febcf343384d498750455c47ec3d",
+        "triton_version": "3.5.1"
+      }
+    },
+    "model": {
+      "name": "bf16_gemm_gelu"
+    },
+    "metric": {
+      "name": "triton_accuracy",
+      "benchmark_values": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    }
+  },
+  {
+    "benchmark": {
+      "name": "Helion Benchmark",
+      "extra_info": {
+        "device": "AMD Instinct MI300X VF gfx942:sramecc+:xnack-",
+        "helion_key": "19ee29773a160c2d941c34d71f9d4b6196ed0fdfa962c1e0aa3e66088d1175af",
+        "torch_key": "1454bc274b3451f386427b8af52434a66b128aec2b9c73c2aafb3bd11344185d",
+        "triton_key": "83044be5c64e73866ddc28f91b98c71258b7febcf343384d498750455c47ec3d",
+        "triton_version": "3.5.1"
+      }
+    },
+    "model": {
+      "name": "bf16_gemm_gelu"
+    },
+    "metric": {
+      "name": "triton_speedup",
+      "benchmark_values": [
+        0.5078887139309886,
+        0.43648891888206914,
+        0.5136971712156515,
+        0.6276335945926256,
+        1.0378203096639345
+      ]
+    }
+  },
+  {
+    "benchmark": {
+      "name": "Helion Benchmark",
+      "extra_info": {
+        "device": "AMD Instinct MI300X VF gfx942:sramecc+:xnack-",
+        "helion_key": "19ee29773a160c2d941c34d71f9d4b6196ed0fdfa962c1e0aa3e66088d1175af",
+        "torch_key": "1454bc274b3451f386427b8af52434a66b128aec2b9c73c2aafb3bd11344185d",
+        "triton_key": "83044be5c64e73866ddc28f91b98c71258b7febcf343384d498750455c47ec3d",
+        "triton_version": "3.5.1"
+      }
+    },
+    "model": {
+      "name": "bf16_gemm_gelu"
+    },
+    "metric": {
+      "name": "triton_tflops",
+      "benchmark_values": [
+        0.0022290016858037658,
+        0.13025970972665668,
+        4.174150988986516,
+        28.526574880358446,
+        188.6719074656994
+      ]
+    }
+  },
+  {
+    "benchmark": {
+      "name": "Helion Benchmark",
+      "extra_info": {
+        "device": "AMD Instinct MI300X VF gfx942:sramecc+:xnack-",
+        "helion_key": "19ee29773a160c2d941c34d71f9d4b6196ed0fdfa962c1e0aa3e66088d1175af",
+        "torch_key": "1454bc274b3451f386427b8af52434a66b128aec2b9c73c2aafb3bd11344185d",
+        "triton_key": "83044be5c64e73866ddc28f91b98c71258b7febcf343384d498750455c47ec3d",
+        "triton_version": "3.5.1"
+      }
+    },
+    "model": {
+      "name": "bf16_gemm_gelu"
+    },
+    "metric": {
+      "name": "helion_accuracy",
+      "benchmark_values": [
+        0.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    }
+  },
+  {
+    "benchmark": {
+      "name": "Helion Benchmark",
+      "extra_info": {
+        "device": "AMD Instinct MI300X VF gfx942:sramecc+:xnack-",
+        "helion_key": "19ee29773a160c2d941c34d71f9d4b6196ed0fdfa962c1e0aa3e66088d1175af",
+        "torch_key": "1454bc274b3451f386427b8af52434a66b128aec2b9c73c2aafb3bd11344185d",
+        "triton_key": "83044be5c64e73866ddc28f91b98c71258b7febcf343384d498750455c47ec3d",
+        "triton_version": "3.5.1"
+      }
+    },
+    "model": {
+      "name": "bf16_gemm_gelu"
+    },
+    "metric": {
+      "name": "helion_speedup",
+      "benchmark_values": [
+        0.4035685445855633,
+        0.3152236717369019,
+        0.3707402552902427,
+        0.5064231868022657,
+        0.938018022090556
+      ]
+    }
+  },
+  {
+    "benchmark": {
+      "name": "Helion Benchmark",
+      "extra_info": {
+        "device": "AMD Instinct MI300X VF gfx942:sramecc+:xnack-",
+        "helion_key": "19ee29773a160c2d941c34d71f9d4b6196ed0fdfa962c1e0aa3e66088d1175af",
+        "torch_key": "1454bc274b3451f386427b8af52434a66b128aec2b9c73c2aafb3bd11344185d",
+        "triton_key": "83044be5c64e73866ddc28f91b98c71258b7febcf343384d498750455c47ec3d",
+        "triton_version": "3.5.1"
+      }
+    },
+    "model": {
+      "name": "bf16_gemm_gelu"
+    },
+    "metric": {
+      "name": "helion_tflops",
+      "benchmark_values": [
+        0.0017711654965832206,
+        0.09407098829584176,
+        3.0125254527189607,
+        23.017440563934926,
+        170.52821940084834
+      ]
+    }
+  }
+]

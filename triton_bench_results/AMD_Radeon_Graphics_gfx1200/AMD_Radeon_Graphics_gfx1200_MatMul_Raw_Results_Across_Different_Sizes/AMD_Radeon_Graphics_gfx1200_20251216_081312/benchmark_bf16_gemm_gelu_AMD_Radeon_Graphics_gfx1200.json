@@ -1,0 +1,452 @@
+[
+  {
+    "benchmark": {
+      "name": "Helion Benchmark",
+      "extra_info": {
+        "device": "AMD Radeon Graphics gfx1200",
+        "helion_key": "5c68e951e8e332377dcafde4c97b272bfc2a5a196b0dd7de889875f2cb028866",
+        "torch_key": "560cb949050aa9596a93413207640d6861ef45d3360db83d2f8e45608d66002d",
+        "triton_key": "fbb4636690b986743d8df7736c3de987f216a3ef997d4dd231c72c7dc8a823af",
+        "triton_version": "3.5.1"
+      }
+    },
+    "model": {
+      "name": "bf16_gemm_gelu"
+    },
+    "metric": {
+      "name": "mako_accuracy",
+      "benchmark_values": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    }
+  },
+  {
+    "benchmark": {
+      "name": "Helion Benchmark",
+      "extra_info": {
+        "device": "AMD Radeon Graphics gfx1200",
+        "helion_key": "5c68e951e8e332377dcafde4c97b272bfc2a5a196b0dd7de889875f2cb028866",
+        "torch_key": "560cb949050aa9596a93413207640d6861ef45d3360db83d2f8e45608d66002d",
+        "triton_key": "fbb4636690b986743d8df7736c3de987f216a3ef997d4dd231c72c7dc8a823af",
+        "triton_version": "3.5.1"
+      }
+    },
+    "model": {
+      "name": "bf16_gemm_gelu"
+    },
+    "metric": {
+      "name": "mako_speedup",
+      "benchmark_values": [
+        1.00773195768027,
+        0.9973651729416476,
+        0.9955752561875431,
+        0.9926693376339971,
+        1.0009414449573846
+      ]
+    }
+  },
+  {
+    "benchmark": {
+      "name": "Helion Benchmark",
+      "extra_info": {
+        "device": "AMD Radeon Graphics gfx1200",
+        "helion_key": "5c68e951e8e332377dcafde4c97b272bfc2a5a196b0dd7de889875f2cb028866",
+        "torch_key": "560cb949050aa9596a93413207640d6861ef45d3360db83d2f8e45608d66002d",
+        "triton_key": "fbb4636690b986743d8df7736c3de987f216a3ef997d4dd231c72c7dc8a823af",
+        "triton_version": "3.5.1"
+      }
+    },
+    "model": {
+      "name": "bf16_gemm_gelu"
+    },
+    "metric": {
+      "name": "mako_tflops",
+      "benchmark_values": [
+        0.004387628894541339,
+        0.27217170356385356,
+        4.961113909774766,
+        11.589488203519455,
+        20.241713283408185
+      ]
+    }
+  },
+  {
+    "benchmark": {
+      "name": "Helion Benchmark",
+      "extra_info": {
+        "device": "AMD Radeon Graphics gfx1200",
+        "helion_key": "5c68e951e8e332377dcafde4c97b272bfc2a5a196b0dd7de889875f2cb028866",
+        "torch_key": "560cb949050aa9596a93413207640d6861ef45d3360db83d2f8e45608d66002d",
+        "triton_key": "fbb4636690b986743d8df7736c3de987f216a3ef997d4dd231c72c7dc8a823af",
+        "triton_version": "3.5.1"
+      }
+    },
+    "model": {
+      "name": "bf16_gemm_gelu"
+    },
+    "metric": {
+      "name": "kernelllm_accuracy",
+      "benchmark_values": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    }
+  },
+  {
+    "benchmark": {
+      "name": "Helion Benchmark",
+      "extra_info": {
+        "device": "AMD Radeon Graphics gfx1200",
+        "helion_key": "5c68e951e8e332377dcafde4c97b272bfc2a5a196b0dd7de889875f2cb028866",
+        "torch_key": "560cb949050aa9596a93413207640d6861ef45d3360db83d2f8e45608d66002d",
+        "triton_key": "fbb4636690b986743d8df7736c3de987f216a3ef997d4dd231c72c7dc8a823af",
+        "triton_version": "3.5.1"
+      }
+    },
+    "model": {
+      "name": "bf16_gemm_gelu"
+    },
+    "metric": {
+      "name": "kernelllm_speedup",
+      "benchmark_values": [
+        1.43210333255048,
+        1.2396165718284748,
+        0.7866904092739662,
+        1.1418633352834198,
+        1.0613973118742637
+      ]
+    }
+  },
+  {
+    "benchmark": {
+      "name": "Helion Benchmark",
+      "extra_info": {
+        "device": "AMD Radeon Graphics gfx1200",
+        "helion_key": "5c68e951e8e332377dcafde4c97b272bfc2a5a196b0dd7de889875f2cb028866",
+        "torch_key": "560cb949050aa9596a93413207640d6861ef45d3360db83d2f8e45608d66002d",
+        "triton_key": "fbb4636690b986743d8df7736c3de987f216a3ef997d4dd231c72c7dc8a823af",
+        "triton_version": "3.5.1"
+      }
+    },
+    "model": {
+      "name": "bf16_gemm_gelu"
+    },
+    "metric": {
+      "name": "kernelllm_tflops",
+      "benchmark_values": [
+        0.006235326679856125,
+        0.33827986305701835,
+        3.920206642219189,
+        13.33133920086679,
+        21.46429261669121
+      ]
+    }
+  },
+  {
+    "benchmark": {
+      "name": "Helion Benchmark",
+      "extra_info": {
+        "device": "AMD Radeon Graphics gfx1200",
+        "helion_key": "5c68e951e8e332377dcafde4c97b272bfc2a5a196b0dd7de889875f2cb028866",
+        "torch_key": "560cb949050aa9596a93413207640d6861ef45d3360db83d2f8e45608d66002d",
+        "triton_key": "fbb4636690b986743d8df7736c3de987f216a3ef997d4dd231c72c7dc8a823af",
+        "triton_version": "3.5.1"
+      }
+    },
+    "model": {
+      "name": "bf16_gemm_gelu"
+    },
+    "metric": {
+      "name": "torch_compile_accuracy",
+      "benchmark_values": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    }
+  },
+  {
+    "benchmark": {
+      "name": "Helion Benchmark",
+      "extra_info": {
+        "device": "AMD Radeon Graphics gfx1200",
+        "helion_key": "5c68e951e8e332377dcafde4c97b272bfc2a5a196b0dd7de889875f2cb028866",
+        "torch_key": "560cb949050aa9596a93413207640d6861ef45d3360db83d2f8e45608d66002d",
+        "triton_key": "fbb4636690b986743d8df7736c3de987f216a3ef997d4dd231c72c7dc8a823af",
+        "triton_version": "3.5.1"
+      }
+    },
+    "model": {
+      "name": "bf16_gemm_gelu"
+    },
+    "metric": {
+      "name": "torch_compile_speedup",
+      "benchmark_values": [
+        2.025906691371646,
+        1.7796125031529986,
+        0.9507042438270694,
+        0.6422971395179704,
+        1.9257390579266331
+      ]
+    }
+  },
+  {
+    "benchmark": {
+      "name": "Helion Benchmark",
+      "extra_info": {
+        "device": "AMD Radeon Graphics gfx1200",
+        "helion_key": "5c68e951e8e332377dcafde4c97b272bfc2a5a196b0dd7de889875f2cb028866",
+        "torch_key": "560cb949050aa9596a93413207640d6861ef45d3360db83d2f8e45608d66002d",
+        "triton_key": "fbb4636690b986743d8df7736c3de987f216a3ef997d4dd231c72c7dc8a823af",
+        "triton_version": "3.5.1"
+      }
+    },
+    "model": {
+      "name": "bf16_gemm_gelu"
+    },
+    "metric": {
+      "name": "torch_compile_tflops",
+      "benchmark_values": [
+        0.008820725262269721,
+        0.4856397434032153,
+        4.737514335374248,
+        7.498866782105054,
+        38.94359461843554
+      ]
+    }
+  },
+  {
+    "benchmark": {
+      "name": "Helion Benchmark",
+      "extra_info": {
+        "device": "AMD Radeon Graphics gfx1200",
+        "helion_key": "5c68e951e8e332377dcafde4c97b272bfc2a5a196b0dd7de889875f2cb028866",
+        "torch_key": "560cb949050aa9596a93413207640d6861ef45d3360db83d2f8e45608d66002d",
+        "triton_key": "fbb4636690b986743d8df7736c3de987f216a3ef997d4dd231c72c7dc8a823af",
+        "triton_version": "3.5.1"
+      }
+    },
+    "model": {
+      "name": "bf16_gemm_gelu"
+    },
+    "metric": {
+      "name": "torch_compile_default_accuracy",
+      "benchmark_values": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    }
+  },
+  {
+    "benchmark": {
+      "name": "Helion Benchmark",
+      "extra_info": {
+        "device": "AMD Radeon Graphics gfx1200",
+        "helion_key": "5c68e951e8e332377dcafde4c97b272bfc2a5a196b0dd7de889875f2cb028866",
+        "torch_key": "560cb949050aa9596a93413207640d6861ef45d3360db83d2f8e45608d66002d",
+        "triton_key": "fbb4636690b986743d8df7736c3de987f216a3ef997d4dd231c72c7dc8a823af",
+        "triton_version": "3.5.1"
+      }
+    },
+    "model": {
+      "name": "bf16_gemm_gelu"
+    },
+    "metric": {
+      "name": "torch_compile_default_speedup",
+      "benchmark_values": [
+        1.4115523845010771,
+        1.2890364926826205,
+        1.1421320416892142,
+        1.19958055602388,
+        1.0159576827339885
+      ]
+    }
+  },
+  {
+    "benchmark": {
+      "name": "Helion Benchmark",
+      "extra_info": {
+        "device": "AMD Radeon Graphics gfx1200",
+        "helion_key": "5c68e951e8e332377dcafde4c97b272bfc2a5a196b0dd7de889875f2cb028866",
+        "torch_key": "560cb949050aa9596a93413207640d6861ef45d3360db83d2f8e45608d66002d",
+        "triton_key": "fbb4636690b986743d8df7736c3de987f216a3ef997d4dd231c72c7dc8a823af",
+        "triton_version": "3.5.1"
+      }
+    },
+    "model": {
+      "name": "bf16_gemm_gelu"
+    },
+    "metric": {
+      "name": "torch_compile_default_tflops",
+      "benchmark_values": [
+        0.006145848587209999,
+        0.35176610101055733,
+        5.691430279738115,
+        14.005192037407332,
+        20.5453817759067
+      ]
+    }
+  },
+  {
+    "benchmark": {
+      "name": "Helion Benchmark",
+      "extra_info": {
+        "device": "AMD Radeon Graphics gfx1200",
+        "helion_key": "5c68e951e8e332377dcafde4c97b272bfc2a5a196b0dd7de889875f2cb028866",
+        "torch_key": "560cb949050aa9596a93413207640d6861ef45d3360db83d2f8e45608d66002d",
+        "triton_key": "fbb4636690b986743d8df7736c3de987f216a3ef997d4dd231c72c7dc8a823af",
+        "triton_version": "3.5.1"
+      }
+    },
+    "model": {
+      "name": "bf16_gemm_gelu"
+    },
+    "metric": {
+      "name": "triton_accuracy",
+      "benchmark_values": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    }
+  },
+  {
+    "benchmark": {
+      "name": "Helion Benchmark",
+      "extra_info": {
+        "device": "AMD Radeon Graphics gfx1200",
+        "helion_key": "5c68e951e8e332377dcafde4c97b272bfc2a5a196b0dd7de889875f2cb028866",
+        "torch_key": "560cb949050aa9596a93413207640d6861ef45d3360db83d2f8e45608d66002d",
+        "triton_key": "fbb4636690b986743d8df7736c3de987f216a3ef997d4dd231c72c7dc8a823af",
+        "triton_version": "3.5.1"
+      }
+    },
+    "model": {
+      "name": "bf16_gemm_gelu"
+    },
+    "metric": {
+      "name": "triton_speedup",
+      "benchmark_values": [
+        1.9073170493474894,
+        1.6033057525235426,
+        0.89757656127261,
+        0.8478757386812605,
+        1.5359717824896657
+      ]
+    }
+  },
+  {
+    "benchmark": {
+      "name": "Helion Benchmark",
+      "extra_info": {
+        "device": "AMD Radeon Graphics gfx1200",
+        "helion_key": "5c68e951e8e332377dcafde4c97b272bfc2a5a196b0dd7de889875f2cb028866",
+        "torch_key": "560cb949050aa9596a93413207640d6861ef45d3360db83d2f8e45608d66002d",
+        "triton_key": "fbb4636690b986743d8df7736c3de987f216a3ef997d4dd231c72c7dc8a823af",
+        "triton_version": "3.5.1"
+      }
+    },
+    "model": {
+      "name": "bf16_gemm_gelu"
+    },
+    "metric": {
+      "name": "triton_tflops",
+      "benchmark_values": [
+        0.008304390203157114,
+        0.4375272666790717,
+        4.472770426486484,
+        9.899012187601064,
+        31.06145777976544
+      ]
+    }
+  },
+  {
+    "benchmark": {
+      "name": "Helion Benchmark",
+      "extra_info": {
+        "device": "AMD Radeon Graphics gfx1200",
+        "helion_key": "5c68e951e8e332377dcafde4c97b272bfc2a5a196b0dd7de889875f2cb028866",
+        "torch_key": "560cb949050aa9596a93413207640d6861ef45d3360db83d2f8e45608d66002d",
+        "triton_key": "fbb4636690b986743d8df7736c3de987f216a3ef997d4dd231c72c7dc8a823af",
+        "triton_version": "3.5.1"
+      }
+    },
+    "model": {
+      "name": "bf16_gemm_gelu"
+    },
+    "metric": {
+      "name": "helion_accuracy",
+      "benchmark_values": [
+        1.0,
+        0.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    }
+  },
+  {
+    "benchmark": {
+      "name": "Helion Benchmark",
+      "extra_info": {
+        "device": "AMD Radeon Graphics gfx1200",
+        "helion_key": "5c68e951e8e332377dcafde4c97b272bfc2a5a196b0dd7de889875f2cb028866",
+        "torch_key": "560cb949050aa9596a93413207640d6861ef45d3360db83d2f8e45608d66002d",
+        "triton_key": "fbb4636690b986743d8df7736c3de987f216a3ef997d4dd231c72c7dc8a823af",
+        "triton_version": "3.5.1"
+      }
+    },
+    "model": {
+      "name": "bf16_gemm_gelu"
+    },
+    "metric": {
+      "name": "helion_speedup",
+      "benchmark_values": [
+        2.29999995206428,
+        1.9595960035442,
+        1.3030888716388447,
+        1.5085106901078627,
+        1.9501107664194426
+      ]
+    }
+  },
+  {
+    "benchmark": {
+      "name": "Helion Benchmark",
+      "extra_info": {
+        "device": "AMD Radeon Graphics gfx1200",
+        "helion_key": "5c68e951e8e332377dcafde4c97b272bfc2a5a196b0dd7de889875f2cb028866",
+        "torch_key": "560cb949050aa9596a93413207640d6861ef45d3360db83d2f8e45608d66002d",
+        "triton_key": "fbb4636690b986743d8df7736c3de987f216a3ef997d4dd231c72c7dc8a823af",
+        "triton_version": "3.5.1"
+      }
+    },
+    "model": {
+      "name": "bf16_gemm_gelu"
+    },
+    "metric": {
+      "name": "helion_tflops",
+      "benchmark_values": [
+        0.010014117514295151,
+        0.5347555710296978,
+        6.493504420264905,
+        17.611974284969907,
+        39.43645575234458
+      ]
+    }
+  }
+]
