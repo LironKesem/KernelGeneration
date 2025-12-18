@@ -8,190 +8,24 @@
         "torch_key": "560cb949050aa9596a93413207640d6861ef45d3360db83d2f8e45608d66002d",
         "triton_key": "fbb4636690b986743d8df7736c3de987f216a3ef997d4dd231c72c7dc8a823af",
         "triton_version": "3.5.1"
-      }
-    },
-    "model": {
-      "name": "bf16_matmul"
-    },
-    "metric": {
-      "name": "triton_accuracy",
-      "benchmark_values": [
-        1.0,
-        1.0,
-        1.0,
-        1.0,
-        1.0,
-        1.0,
-        1.0,
-        1.0,
-        1.0,
-        1.0
+      },
+      "shapes": [
+        {
+          "M": 512,
+          "D": 512
+        },
+        {
+          "M": 32,
+          "D": 1024
+        },
+        {
+          "M": 2048,
+          "D": 2048
+        }
       ]
-    }
-  },
-  {
-    "benchmark": {
-      "name": "Helion Benchmark",
-      "extra_info": {
-        "device": "AMD Radeon Graphics gfx1200",
-        "helion_key": "5c68e951e8e332377dcafde4c97b272bfc2a5a196b0dd7de889875f2cb028866",
-        "torch_key": "560cb949050aa9596a93413207640d6861ef45d3360db83d2f8e45608d66002d",
-        "triton_key": "fbb4636690b986743d8df7736c3de987f216a3ef997d4dd231c72c7dc8a823af",
-        "triton_version": "3.5.1"
-      }
     },
     "model": {
-      "name": "bf16_matmul"
-    },
-    "metric": {
-      "name": "triton_speedup",
-      "benchmark_values": [
-        1.836747394093238,
-        1.7258012184319615,
-        1.7084766360612005,
-        1.7453592246557093,
-        1.716367271214857,
-        1.7486965438606206,
-        1.7395106760767252,
-        1.9883795472203678,
-        1.5711450594154537,
-        1.7754170945704408
-      ]
-    }
-  },
-  {
-    "benchmark": {
-      "name": "Helion Benchmark",
-      "extra_info": {
-        "device": "AMD Radeon Graphics gfx1200",
-        "helion_key": "5c68e951e8e332377dcafde4c97b272bfc2a5a196b0dd7de889875f2cb028866",
-        "torch_key": "560cb949050aa9596a93413207640d6861ef45d3360db83d2f8e45608d66002d",
-        "triton_key": "fbb4636690b986743d8df7736c3de987f216a3ef997d4dd231c72c7dc8a823af",
-        "triton_version": "3.5.1"
-      }
-    },
-    "model": {
-      "name": "bf16_matmul"
-    },
-    "metric": {
-      "name": "triton_tflops",
-      "benchmark_values": [
-        36.40474350801728,
-        37.55521859438039,
-        37.580912214133605,
-        38.29455805907453,
-        38.28507173656407,
-        39.159484115002556,
-        39.43345313808699,
-        40.33448702849798,
-        35.68495120084453,
-        41.01576413665033
-      ]
-    }
-  },
-  {
-    "benchmark": {
-      "name": "Helion Benchmark",
-      "extra_info": {
-        "device": "AMD Radeon Graphics gfx1200",
-        "helion_key": "5c68e951e8e332377dcafde4c97b272bfc2a5a196b0dd7de889875f2cb028866",
-        "torch_key": "560cb949050aa9596a93413207640d6861ef45d3360db83d2f8e45608d66002d",
-        "triton_key": "fbb4636690b986743d8df7736c3de987f216a3ef997d4dd231c72c7dc8a823af",
-        "triton_version": "3.5.1"
-      }
-    },
-    "model": {
-      "name": "bf16_matmul"
-    },
-    "metric": {
-      "name": "kernelllm_accuracy",
-      "benchmark_values": [
-        1.0,
-        1.0,
-        1.0,
-        1.0,
-        1.0,
-        1.0,
-        1.0,
-        1.0,
-        1.0,
-        1.0
-      ]
-    }
-  },
-  {
-    "benchmark": {
-      "name": "Helion Benchmark",
-      "extra_info": {
-        "device": "AMD Radeon Graphics gfx1200",
-        "helion_key": "5c68e951e8e332377dcafde4c97b272bfc2a5a196b0dd7de889875f2cb028866",
-        "torch_key": "560cb949050aa9596a93413207640d6861ef45d3360db83d2f8e45608d66002d",
-        "triton_key": "fbb4636690b986743d8df7736c3de987f216a3ef997d4dd231c72c7dc8a823af",
-        "triton_version": "3.5.1"
-      }
-    },
-    "model": {
-      "name": "bf16_matmul"
-    },
-    "metric": {
-      "name": "kernelllm_speedup",
-      "benchmark_values": [
-        0.9371404779215906,
-        0.9146316451502667,
-        0.9168509239515658,
-        0.9255242493705531,
-        0.9230969058467325,
-        0.9253934958829076,
-        0.9168406264743362,
-        0.9333394183561947,
-        0.9255595662546142,
-        0.92916196521265
-      ]
-    }
-  },
-  {
-    "benchmark": {
-      "name": "Helion Benchmark",
-      "extra_info": {
-        "device": "AMD Radeon Graphics gfx1200",
-        "helion_key": "5c68e951e8e332377dcafde4c97b272bfc2a5a196b0dd7de889875f2cb028866",
-        "torch_key": "560cb949050aa9596a93413207640d6861ef45d3360db83d2f8e45608d66002d",
-        "triton_key": "fbb4636690b986743d8df7736c3de987f216a3ef997d4dd231c72c7dc8a823af",
-        "triton_version": "3.5.1"
-      }
-    },
-    "model": {
-      "name": "bf16_matmul"
-    },
-    "metric": {
-      "name": "kernelllm_tflops",
-      "benchmark_values": [
-        18.57433354168919,
-        19.903330117106538,
-        20.167729168312018,
-        20.306732048007735,
-        20.59048308182199,
-        20.722824682978125,
-        20.78411611747728,
-        18.93288769515873,
-        21.02195959395312,
-        21.465540760228667
-      ]
-    }
-  },
-  {
-    "benchmark": {
-      "name": "Helion Benchmark",
-      "extra_info": {
-        "device": "AMD Radeon Graphics gfx1200",
-        "helion_key": "5c68e951e8e332377dcafde4c97b272bfc2a5a196b0dd7de889875f2cb028866",
-        "torch_key": "560cb949050aa9596a93413207640d6861ef45d3360db83d2f8e45608d66002d",
-        "triton_key": "fbb4636690b986743d8df7736c3de987f216a3ef997d4dd231c72c7dc8a823af",
-        "triton_version": "3.5.1"
-      }
-    },
-    "model": {
-      "name": "bf16_matmul"
+      "name": "bf16_gemm_gelu"
     },
     "metric": {
       "name": "mako_accuracy",
@@ -200,7 +34,77 @@
         1.0,
         1.0,
         1.0,
-        1.0,
+        1.0
+      ]
+    }
+  },
+  {
+    "benchmark": {
+      "name": "Helion Benchmark",
+      "extra_info": {
+        "device": "AMD Radeon Graphics gfx1200",
+        "helion_key": "5c68e951e8e332377dcafde4c97b272bfc2a5a196b0dd7de889875f2cb028866",
+        "torch_key": "560cb949050aa9596a93413207640d6861ef45d3360db83d2f8e45608d66002d",
+        "triton_key": "fbb4636690b986743d8df7736c3de987f216a3ef997d4dd231c72c7dc8a823af",
+        "triton_version": "3.5.1"
+      }
+    },
+    "model": {
+      "name": "bf16_gemm_gelu"
+    },
+    "metric": {
+      "name": "mako_speedup",
+      "benchmark_values": [
+        1.00773195768027,
+        0.9973651729416476,
+        0.9955752561875431,
+        0.9926693376339971,
+        1.0009414449573846
+      ]
+    }
+  },
+  {
+    "benchmark": {
+      "name": "Helion Benchmark",
+      "extra_info": {
+        "device": "AMD Radeon Graphics gfx1200",
+        "helion_key": "5c68e951e8e332377dcafde4c97b272bfc2a5a196b0dd7de889875f2cb028866",
+        "torch_key": "560cb949050aa9596a93413207640d6861ef45d3360db83d2f8e45608d66002d",
+        "triton_key": "fbb4636690b986743d8df7736c3de987f216a3ef997d4dd231c72c7dc8a823af",
+        "triton_version": "3.5.1"
+      }
+    },
+    "model": {
+      "name": "bf16_gemm_gelu"
+    },
+    "metric": {
+      "name": "mako_tflops",
+      "benchmark_values": [
+        0.004387628894541339,
+        0.27217170356385356,
+        4.961113909774766,
+        11.589488203519455,
+        20.241713283408185
+      ]
+    }
+  },
+  {
+    "benchmark": {
+      "name": "Helion Benchmark",
+      "extra_info": {
+        "device": "AMD Radeon Graphics gfx1200",
+        "helion_key": "5c68e951e8e332377dcafde4c97b272bfc2a5a196b0dd7de889875f2cb028866",
+        "torch_key": "560cb949050aa9596a93413207640d6861ef45d3360db83d2f8e45608d66002d",
+        "triton_key": "fbb4636690b986743d8df7736c3de987f216a3ef997d4dd231c72c7dc8a823af",
+        "triton_version": "3.5.1"
+      }
+    },
+    "model": {
+      "name": "bf16_gemm_gelu"
+    },
+    "metric": {
+      "name": "kernelllm_accuracy",
+      "benchmark_values": [
         1.0,
         1.0,
         1.0,
@@ -221,21 +125,16 @@
       }
     },
     "model": {
-      "name": "bf16_matmul"
+      "name": "bf16_gemm_gelu"
     },
     "metric": {
-      "name": "mako_speedup",
+      "name": "kernelllm_speedup",
       "benchmark_values": [
-        1.6987858850836854,
-        1.9765187965994924,
-        1.9854043756319386,
-        2.0375022793892215,
-        1.724350586569061,
-        2.0980369349043935,
-        2.075897397037544,
-        1.907485822781255,
-        1.2404276629945625,
-        2.078703112717726
+        1.43210333255048,
+        1.2396165718284748,
+        0.7866904092739662,
+        1.1418633352834198,
+        1.0613973118742637
       ]
     }
   },
@@ -251,21 +150,16 @@
       }
     },
     "model": {
-      "name": "bf16_matmul"
+      "name": "bf16_gemm_gelu"
     },
     "metric": {
-      "name": "mako_tflops",
+      "name": "kernelllm_tflops",
       "benchmark_values": [
-        33.670315591786995,
-        43.011092279584,
-        43.67241902833247,
-        44.70440711078176,
-        38.46314656131587,
-        46.98244776288964,
-        47.05909762519109,
-        38.693549369670485,
-        28.173465178706856,
-        48.022291123641295
+        0.006235326679856125,
+        0.33827986305701835,
+        3.920206642219189,
+        13.33133920086679,
+        21.46429261669121
       ]
     }
   },
@@ -281,7 +175,7 @@
       }
     },
     "model": {
-      "name": "bf16_matmul"
+      "name": "bf16_gemm_gelu"
     },
     "metric": {
       "name": "torch_compile_accuracy",
@@ -290,11 +184,6 @@
         1.0,
         1.0,
         1.0,
-        1.0,
-        1.0,
-        1.0,
-        1.0,
-        1.0,
         1.0
       ]
     }
@@ -311,21 +200,16 @@
       }
     },
     "model": {
-      "name": "bf16_matmul"
+      "name": "bf16_gemm_gelu"
     },
     "metric": {
       "name": "torch_compile_speedup",
       "benchmark_values": [
-        2.098384870096725,
-        1.9919171552240251,
-        1.9815012236636669,
-        2.07439776731805,
-        2.0486010199280864,
-        2.081346502882579,
-        2.0602981972183314,
-        2.3507493878630616,
-        1.9304113415717927,
-        2.1175999134398364
+        2.025906691371646,
+        1.7796125031529986,
+        0.9507042438270694,
+        0.6422971395179704,
+        1.9257390579266331
       ]
     }
   },
@@ -341,21 +225,16 @@
       }
     },
     "model": {
-      "name": "bf16_matmul"
+      "name": "bf16_gemm_gelu"
     },
     "metric": {
       "name": "torch_compile_tflops",
       "benchmark_values": [
-        41.590456707678136,
-        43.34617648161303,
-        43.58656241877635,
-        45.51392321763771,
-        45.695835805603075,
-        46.608690114699954,
-        46.70547500963466,
-        47.685197136814025,
-        43.84485958742447,
-        48.92088673194503
+        0.008820725262269721,
+        0.4856397434032153,
+        4.737514335374248,
+        7.498866782105054,
+        38.94359461843554
       ]
     }
   },
@@ -371,7 +250,7 @@
       }
     },
     "model": {
-      "name": "bf16_matmul"
+      "name": "bf16_gemm_gelu"
     },
     "metric": {
       "name": "torch_compile_default_accuracy",
@@ -380,7 +259,77 @@
         1.0,
         1.0,
         1.0,
-        1.0,
+        1.0
+      ]
+    }
+  },
+  {
+    "benchmark": {
+      "name": "Helion Benchmark",
+      "extra_info": {
+        "device": "AMD Radeon Graphics gfx1200",
+        "helion_key": "5c68e951e8e332377dcafde4c97b272bfc2a5a196b0dd7de889875f2cb028866",
+        "torch_key": "560cb949050aa9596a93413207640d6861ef45d3360db83d2f8e45608d66002d",
+        "triton_key": "fbb4636690b986743d8df7736c3de987f216a3ef997d4dd231c72c7dc8a823af",
+        "triton_version": "3.5.1"
+      }
+    },
+    "model": {
+      "name": "bf16_gemm_gelu"
+    },
+    "metric": {
+      "name": "torch_compile_default_speedup",
+      "benchmark_values": [
+        1.4115523845010771,
+        1.2890364926826205,
+        1.1421320416892142,
+        1.19958055602388,
+        1.0159576827339885
+      ]
+    }
+  },
+  {
+    "benchmark": {
+      "name": "Helion Benchmark",
+      "extra_info": {
+        "device": "AMD Radeon Graphics gfx1200",
+        "helion_key": "5c68e951e8e332377dcafde4c97b272bfc2a5a196b0dd7de889875f2cb028866",
+        "torch_key": "560cb949050aa9596a93413207640d6861ef45d3360db83d2f8e45608d66002d",
+        "triton_key": "fbb4636690b986743d8df7736c3de987f216a3ef997d4dd231c72c7dc8a823af",
+        "triton_version": "3.5.1"
+      }
+    },
+    "model": {
+      "name": "bf16_gemm_gelu"
+    },
+    "metric": {
+      "name": "torch_compile_default_tflops",
+      "benchmark_values": [
+        0.006145848587209999,
+        0.35176610101055733,
+        5.691430279738115,
+        14.005192037407332,
+        20.5453817759067
+      ]
+    }
+  },
+  {
+    "benchmark": {
+      "name": "Helion Benchmark",
+      "extra_info": {
+        "device": "AMD Radeon Graphics gfx1200",
+        "helion_key": "5c68e951e8e332377dcafde4c97b272bfc2a5a196b0dd7de889875f2cb028866",
+        "torch_key": "560cb949050aa9596a93413207640d6861ef45d3360db83d2f8e45608d66002d",
+        "triton_key": "fbb4636690b986743d8df7736c3de987f216a3ef997d4dd231c72c7dc8a823af",
+        "triton_version": "3.5.1"
+      }
+    },
+    "model": {
+      "name": "bf16_gemm_gelu"
+    },
+    "metric": {
+      "name": "triton_accuracy",
+      "benchmark_values": [
         1.0,
         1.0,
         1.0,
@@ -401,21 +350,16 @@
       }
     },
     "model": {
-      "name": "bf16_matmul"
+      "name": "bf16_gemm_gelu"
     },
     "metric": {
-      "name": "torch_compile_default_speedup",
+      "name": "triton_speedup",
       "benchmark_values": [
-        1.0126361363986784,
-        0.9268450350944432,
-        0.9234901568542253,
-        0.9382533746253889,
-        0.9268825149351236,
-        0.938682462260486,
-        0.9241419244344042,
-        0.9938496607528661,
-        0.9258713775794725,
-        0.9401780257146726
+        1.9073170493474894,
+        1.6033057525235426,
+        0.89757656127261,
+        0.8478757386812605,
+        1.5359717824896657
       ]
     }
   },
@@ -431,21 +375,16 @@
       }
     },
     "model": {
-      "name": "bf16_matmul"
+      "name": "bf16_gemm_gelu"
     },
     "metric": {
-      "name": "torch_compile_default_tflops",
+      "name": "triton_tflops",
       "benchmark_values": [
-        20.07067435135402,
-        20.16910610812635,
-        20.313770632162097,
-        20.586019096327945,
-        20.674924400382586,
-        21.020411516779898,
-        20.949631279249623,
-        20.160344289374706,
-        21.0290416719858,
-        21.720034276511583
+        0.008304390203157114,
+        0.4375272666790717,
+        4.472770426486484,
+        9.899012187601064,
+        31.06145777976544
       ]
     }
   },
@@ -461,18 +400,13 @@
       }
     },
     "model": {
-      "name": "bf16_matmul"
+      "name": "bf16_gemm_gelu"
     },
     "metric": {
       "name": "helion_accuracy",
       "benchmark_values": [
         1.0,
-        1.0,
-        1.0,
-        1.0,
-        1.0,
-        1.0,
-        1.0,
+        0.0,
         1.0,
         1.0,
         1.0
@@ -491,21 +425,16 @@
       }
     },
     "model": {
-      "name": "bf16_matmul"
+      "name": "bf16_gemm_gelu"
     },
     "metric": {
       "name": "helion_speedup",
       "benchmark_values": [
-        2.967400759819391,
-        2.2503651963200664,
-        2.332021792245279,
-        2.3260366832335264,
-        2.412081520803197,
-        2.445364118350723,
-        2.456221252237681,
-        2.665113607227344,
-        2.2655792449659047,
-        2.5113188563223807
+        2.29999995206428,
+        1.9595960035442,
+        1.3030888716388447,
+        1.5085106901078627,
+        1.9501107664194426
       ]
     }
   },
@@ -521,21 +450,16 @@
       }
     },
     "model": {
-      "name": "bf16_matmul"
+      "name": "bf16_gemm_gelu"
     },
     "metric": {
       "name": "helion_tflops",
       "benchmark_values": [
-        58.81454569862141,
-        48.97027303166069,
-        51.29687138002918,
-        51.0350795156191,
-        53.803585984850024,
-        54.76032859111365,
-        55.68076527436951,
-        54.06210819783252,
-        51.457428652917486,
-        58.016599140475655
+        0.010014117514295151,
+        0.5347555710296978,
+        6.493504420264905,
+        17.611974284969907,
+        39.43645575234458
       ]
     }
   }
