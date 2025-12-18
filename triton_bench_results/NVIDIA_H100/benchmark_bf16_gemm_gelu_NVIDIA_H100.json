@@ -1,0 +1,578 @@
+[
+  {
+    "benchmark": {
+      "name": "Helion Benchmark",
+      "extra_info": {
+        "device": "NVIDIA H100",
+        "helion_key": "51e8afc42104bbcb61bbab34f6fc7d57e7dcbccbda2c2f8ad4656b62c3398b74",
+        "torch_key": "ee4565e219fd10bf9b40748e5b02586523e1e1a82574dd94fe2f252addc79080",
+        "triton_key": "903120782bee66c65dd0f35749de8448c243657a2abb753c6f2982e34512f9eb",
+        "triton_version": "3.5.1"
+      }
+    },
+    "model": {
+      "name": "bf16_gemm_gelu"
+    },
+    "metric": {
+      "name": "mako_accuracy",
+      "benchmark_values": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "shape": [
+      "(32, 64, 16)",
+      "(128, 256, 64)",
+      "(512, 1024, 128)",
+      "(1024, 2048, 256)",
+      "(512, 2048, 4096)"
+    ]
+  },
+  {
+    "benchmark": {
+      "name": "Helion Benchmark",
+      "extra_info": {
+        "device": "NVIDIA H100",
+        "helion_key": "51e8afc42104bbcb61bbab34f6fc7d57e7dcbccbda2c2f8ad4656b62c3398b74",
+        "torch_key": "ee4565e219fd10bf9b40748e5b02586523e1e1a82574dd94fe2f252addc79080",
+        "triton_key": "903120782bee66c65dd0f35749de8448c243657a2abb753c6f2982e34512f9eb",
+        "triton_version": "3.5.1"
+      }
+    },
+    "model": {
+      "name": "bf16_gemm_gelu"
+    },
+    "metric": {
+      "name": "mako_speedup",
+      "benchmark_values": [
+        1.096045192166268,
+        1.0421835816125904,
+        1.021097022837788,
+        0.9562290136388197,
+        1.079166665150842
+      ]
+    },
+    "shape": [
+      "(32, 64, 16)",
+      "(128, 256, 64)",
+      "(512, 1024, 128)",
+      "(1024, 2048, 256)",
+      "(512, 2048, 4096)"
+    ]
+  },
+  {
+    "benchmark": {
+      "name": "Helion Benchmark",
+      "extra_info": {
+        "device": "NVIDIA H100",
+        "helion_key": "51e8afc42104bbcb61bbab34f6fc7d57e7dcbccbda2c2f8ad4656b62c3398b74",
+        "torch_key": "ee4565e219fd10bf9b40748e5b02586523e1e1a82574dd94fe2f252addc79080",
+        "triton_key": "903120782bee66c65dd0f35749de8448c243657a2abb753c6f2982e34512f9eb",
+        "triton_version": "3.5.1"
+      }
+    },
+    "model": {
+      "name": "bf16_gemm_gelu"
+    },
+    "metric": {
+      "name": "mako_tflops",
+      "benchmark_values": [
+        0.006011299623952519,
+        0.3284168630680373,
+        8.870345984171458,
+        56.55790062650652,
+        279.96160707242507
+      ]
+    },
+    "shape": [
+      "(32, 64, 16)",
+      "(128, 256, 64)",
+      "(512, 1024, 128)",
+      "(1024, 2048, 256)",
+      "(512, 2048, 4096)"
+    ]
+  },
+  {
+    "benchmark": {
+      "name": "Helion Benchmark",
+      "extra_info": {
+        "device": "NVIDIA H100",
+        "helion_key": "51e8afc42104bbcb61bbab34f6fc7d57e7dcbccbda2c2f8ad4656b62c3398b74",
+        "torch_key": "ee4565e219fd10bf9b40748e5b02586523e1e1a82574dd94fe2f252addc79080",
+        "triton_key": "903120782bee66c65dd0f35749de8448c243657a2abb753c6f2982e34512f9eb",
+        "triton_version": "3.5.1"
+      }
+    },
+    "model": {
+      "name": "bf16_gemm_gelu"
+    },
+    "metric": {
+      "name": "kernelllm_accuracy",
+      "benchmark_values": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "shape": [
+      "(32, 64, 16)",
+      "(128, 256, 64)",
+      "(512, 1024, 128)",
+      "(1024, 2048, 256)",
+      "(512, 2048, 4096)"
+    ]
+  },
+  {
+    "benchmark": {
+      "name": "Helion Benchmark",
+      "extra_info": {
+        "device": "NVIDIA H100",
+        "helion_key": "51e8afc42104bbcb61bbab34f6fc7d57e7dcbccbda2c2f8ad4656b62c3398b74",
+        "torch_key": "ee4565e219fd10bf9b40748e5b02586523e1e1a82574dd94fe2f252addc79080",
+        "triton_key": "903120782bee66c65dd0f35749de8448c243657a2abb753c6f2982e34512f9eb",
+        "triton_version": "3.5.1"
+      }
+    },
+    "model": {
+      "name": "bf16_gemm_gelu"
+    },
+    "metric": {
+      "name": "kernelllm_speedup",
+      "benchmark_values": [
+        1.4641508364715132,
+        1.5053763328693759,
+        1.4277286193940892,
+        1.3491686743239928,
+        1.3080808110502837
+      ]
+    },
+    "shape": [
+      "(32, 64, 16)",
+      "(128, 256, 64)",
+      "(512, 1024, 128)",
+      "(1024, 2048, 256)",
+      "(512, 2048, 4096)"
+    ]
+  },
+  {
+    "benchmark": {
+      "name": "Helion Benchmark",
+      "extra_info": {
+        "device": "NVIDIA H100",
+        "helion_key": "51e8afc42104bbcb61bbab34f6fc7d57e7dcbccbda2c2f8ad4656b62c3398b74",
+        "torch_key": "ee4565e219fd10bf9b40748e5b02586523e1e1a82574dd94fe2f252addc79080",
+        "triton_key": "903120782bee66c65dd0f35749de8448c243657a2abb753c6f2982e34512f9eb",
+        "triton_version": "3.5.1"
+      }
+    },
+    "model": {
+      "name": "bf16_gemm_gelu"
+    },
+    "metric": {
+      "name": "kernelllm_tflops",
+      "benchmark_values": [
+        0.008030188386023969,
+        0.47437992854660543,
+        12.402784987397714,
+        79.79903006753334,
+        339.3474037590392
+      ]
+    },
+    "shape": [
+      "(32, 64, 16)",
+      "(128, 256, 64)",
+      "(512, 1024, 128)",
+      "(1024, 2048, 256)",
+      "(512, 2048, 4096)"
+    ]
+  },
+  {
+    "benchmark": {
+      "name": "Helion Benchmark",
+      "extra_info": {
+        "device": "NVIDIA H100",
+        "helion_key": "51e8afc42104bbcb61bbab34f6fc7d57e7dcbccbda2c2f8ad4656b62c3398b74",
+        "torch_key": "ee4565e219fd10bf9b40748e5b02586523e1e1a82574dd94fe2f252addc79080",
+        "triton_key": "903120782bee66c65dd0f35749de8448c243657a2abb753c6f2982e34512f9eb",
+        "triton_version": "3.5.1"
+      }
+    },
+    "model": {
+      "name": "bf16_gemm_gelu"
+    },
+    "metric": {
+      "name": "torch_compile_accuracy",
+      "benchmark_values": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "shape": [
+      "(32, 64, 16)",
+      "(128, 256, 64)",
+      "(512, 1024, 128)",
+      "(1024, 2048, 256)",
+      "(512, 2048, 4096)"
+    ]
+  },
+  {
+    "benchmark": {
+      "name": "Helion Benchmark",
+      "extra_info": {
+        "device": "NVIDIA H100",
+        "helion_key": "51e8afc42104bbcb61bbab34f6fc7d57e7dcbccbda2c2f8ad4656b62c3398b74",
+        "torch_key": "ee4565e219fd10bf9b40748e5b02586523e1e1a82574dd94fe2f252addc79080",
+        "triton_key": "903120782bee66c65dd0f35749de8448c243657a2abb753c6f2982e34512f9eb",
+        "triton_version": "3.5.1"
+      }
+    },
+    "model": {
+      "name": "bf16_gemm_gelu"
+    },
+    "metric": {
+      "name": "torch_compile_speedup",
+      "benchmark_values": [
+        2.3515149954395183,
+        2.2105262271074446,
+        1.8906249626965064,
+        1.53929549640686,
+        1.4653464368350577
+      ]
+    },
+    "shape": [
+      "(32, 64, 16)",
+      "(128, 256, 64)",
+      "(512, 1024, 128)",
+      "(1024, 2048, 256)",
+      "(512, 2048, 4096)"
+    ]
+  },
+  {
+    "benchmark": {
+      "name": "Helion Benchmark",
+      "extra_info": {
+        "device": "NVIDIA H100",
+        "helion_key": "51e8afc42104bbcb61bbab34f6fc7d57e7dcbccbda2c2f8ad4656b62c3398b74",
+        "torch_key": "ee4565e219fd10bf9b40748e5b02586523e1e1a82574dd94fe2f252addc79080",
+        "triton_key": "903120782bee66c65dd0f35749de8448c243657a2abb753c6f2982e34512f9eb",
+        "triton_version": "3.5.1"
+      }
+    },
+    "model": {
+      "name": "bf16_gemm_gelu"
+    },
+    "metric": {
+      "name": "torch_compile_tflops",
+      "benchmark_values": [
+        0.012896969311882106,
+        0.6965894512682087,
+        16.424000041466613,
+        91.04442605157311,
+        380.1458631200887
+      ]
+    },
+    "shape": [
+      "(32, 64, 16)",
+      "(128, 256, 64)",
+      "(512, 1024, 128)",
+      "(1024, 2048, 256)",
+      "(512, 2048, 4096)"
+    ]
+  },
+  {
+    "benchmark": {
+      "name": "Helion Benchmark",
+      "extra_info": {
+        "device": "NVIDIA H100",
+        "helion_key": "51e8afc42104bbcb61bbab34f6fc7d57e7dcbccbda2c2f8ad4656b62c3398b74",
+        "torch_key": "ee4565e219fd10bf9b40748e5b02586523e1e1a82574dd94fe2f252addc79080",
+        "triton_key": "903120782bee66c65dd0f35749de8448c243657a2abb753c6f2982e34512f9eb",
+        "triton_version": "3.5.1"
+      }
+    },
+    "model": {
+      "name": "bf16_gemm_gelu"
+    },
+    "metric": {
+      "name": "torch_compile_default_accuracy",
+      "benchmark_values": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "shape": [
+      "(32, 64, 16)",
+      "(128, 256, 64)",
+      "(512, 1024, 128)",
+      "(1024, 2048, 256)",
+      "(512, 2048, 4096)"
+    ]
+  },
+  {
+    "benchmark": {
+      "name": "Helion Benchmark",
+      "extra_info": {
+        "device": "NVIDIA H100",
+        "helion_key": "51e8afc42104bbcb61bbab34f6fc7d57e7dcbccbda2c2f8ad4656b62c3398b74",
+        "torch_key": "ee4565e219fd10bf9b40748e5b02586523e1e1a82574dd94fe2f252addc79080",
+        "triton_key": "903120782bee66c65dd0f35749de8448c243657a2abb753c6f2982e34512f9eb",
+        "triton_version": "3.5.1"
+      }
+    },
+    "model": {
+      "name": "bf16_gemm_gelu"
+    },
+    "metric": {
+      "name": "torch_compile_default_speedup",
+      "benchmark_values": [
+        1.5335967479173507,
+        1.4482758689902095,
+        1.5031055232561292,
+        1.3786408397952785,
+        1.379493945240776
+      ]
+    },
+    "shape": [
+      "(32, 64, 16)",
+      "(128, 256, 64)",
+      "(512, 1024, 128)",
+      "(1024, 2048, 256)",
+      "(512, 2048, 4096)"
+    ]
+  },
+  {
+    "benchmark": {
+      "name": "Helion Benchmark",
+      "extra_info": {
+        "device": "NVIDIA H100",
+        "helion_key": "51e8afc42104bbcb61bbab34f6fc7d57e7dcbccbda2c2f8ad4656b62c3398b74",
+        "torch_key": "ee4565e219fd10bf9b40748e5b02586523e1e1a82574dd94fe2f252addc79080",
+        "triton_key": "903120782bee66c65dd0f35749de8448c243657a2abb753c6f2982e34512f9eb",
+        "triton_version": "3.5.1"
+      }
+    },
+    "model": {
+      "name": "bf16_gemm_gelu"
+    },
+    "metric": {
+      "name": "torch_compile_default_tflops",
+      "benchmark_values": [
+        0.008411067007036225,
+        0.45638621270058416,
+        13.057589772366853,
+        81.54221478813685,
+        357.8736763540645
+      ]
+    },
+    "shape": [
+      "(32, 64, 16)",
+      "(128, 256, 64)",
+      "(512, 1024, 128)",
+      "(1024, 2048, 256)",
+      "(512, 2048, 4096)"
+    ]
+  },
+  {
+    "benchmark": {
+      "name": "Helion Benchmark",
+      "extra_info": {
+        "device": "NVIDIA H100",
+        "helion_key": "51e8afc42104bbcb61bbab34f6fc7d57e7dcbccbda2c2f8ad4656b62c3398b74",
+        "torch_key": "ee4565e219fd10bf9b40748e5b02586523e1e1a82574dd94fe2f252addc79080",
+        "triton_key": "903120782bee66c65dd0f35749de8448c243657a2abb753c6f2982e34512f9eb",
+        "triton_version": "3.5.1"
+      }
+    },
+    "model": {
+      "name": "bf16_gemm_gelu"
+    },
+    "metric": {
+      "name": "triton_accuracy",
+      "benchmark_values": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "shape": [
+      "(32, 64, 16)",
+      "(128, 256, 64)",
+      "(512, 1024, 128)",
+      "(1024, 2048, 256)",
+      "(512, 2048, 4096)"
+    ]
+  },
+  {
+    "benchmark": {
+      "name": "Helion Benchmark",
+      "extra_info": {
+        "device": "NVIDIA H100",
+        "helion_key": "51e8afc42104bbcb61bbab34f6fc7d57e7dcbccbda2c2f8ad4656b62c3398b74",
+        "torch_key": "ee4565e219fd10bf9b40748e5b02586523e1e1a82574dd94fe2f252addc79080",
+        "triton_key": "903120782bee66c65dd0f35749de8448c243657a2abb753c6f2982e34512f9eb",
+        "triton_version": "3.5.1"
+      }
+    },
+    "model": {
+      "name": "bf16_gemm_gelu"
+    },
+    "metric": {
+      "name": "triton_speedup",
+      "benchmark_values": [
+        1.8834951044813402,
+        1.6867469457049935,
+        1.4319525776348954,
+        1.115913643613344,
+        1.3831775352311777
+      ]
+    },
+    "shape": [
+      "(32, 64, 16)",
+      "(128, 256, 64)",
+      "(512, 1024, 128)",
+      "(1024, 2048, 256)",
+      "(512, 2048, 4096)"
+    ]
+  },
+  {
+    "benchmark": {
+      "name": "Helion Benchmark",
+      "extra_info": {
+        "device": "NVIDIA H100",
+        "helion_key": "51e8afc42104bbcb61bbab34f6fc7d57e7dcbccbda2c2f8ad4656b62c3398b74",
+        "torch_key": "ee4565e219fd10bf9b40748e5b02586523e1e1a82574dd94fe2f252addc79080",
+        "triton_key": "903120782bee66c65dd0f35749de8448c243657a2abb753c6f2982e34512f9eb",
+        "triton_version": "3.5.1"
+      }
+    },
+    "model": {
+      "name": "bf16_gemm_gelu"
+    },
+    "metric": {
+      "name": "triton_tflops",
+      "benchmark_values": [
+        0.010330097238880571,
+        0.531534127452747,
+        12.439478827630952,
+        66.0027379038357,
+        358.8292875741022
+      ]
+    },
+    "shape": [
+      "(32, 64, 16)",
+      "(128, 256, 64)",
+      "(512, 1024, 128)",
+      "(1024, 2048, 256)",
+      "(512, 2048, 4096)"
+    ]
+  },
+  {
+    "benchmark": {
+      "name": "Helion Benchmark",
+      "extra_info": {
+        "device": "NVIDIA H100",
+        "helion_key": "51e8afc42104bbcb61bbab34f6fc7d57e7dcbccbda2c2f8ad4656b62c3398b74",
+        "torch_key": "ee4565e219fd10bf9b40748e5b02586523e1e1a82574dd94fe2f252addc79080",
+        "triton_key": "903120782bee66c65dd0f35749de8448c243657a2abb753c6f2982e34512f9eb",
+        "triton_version": "3.5.1"
+      }
+    },
+    "model": {
+      "name": "bf16_gemm_gelu"
+    },
+    "metric": {
+      "name": "helion_accuracy",
+      "benchmark_values": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "shape": [
+      "(32, 64, 16)",
+      "(128, 256, 64)",
+      "(512, 1024, 128)",
+      "(1024, 2048, 256)",
+      "(512, 2048, 4096)"
+    ]
+  },
+  {
+    "benchmark": {
+      "name": "Helion Benchmark",
+      "extra_info": {
+        "device": "NVIDIA H100",
+        "helion_key": "51e8afc42104bbcb61bbab34f6fc7d57e7dcbccbda2c2f8ad4656b62c3398b74",
+        "torch_key": "ee4565e219fd10bf9b40748e5b02586523e1e1a82574dd94fe2f252addc79080",
+        "triton_key": "903120782bee66c65dd0f35749de8448c243657a2abb753c6f2982e34512f9eb",
+        "triton_version": "3.5.1"
+      }
+    },
+    "model": {
+      "name": "bf16_gemm_gelu"
+    },
+    "metric": {
+      "name": "helion_speedup",
+      "benchmark_values": [
+        2.71328666205008,
+        2.5766870289319743,
+        2.1607142079896122,
+        1.6182336909926047,
+        1.4489510653467719
+      ]
+    },
+    "shape": [
+      "(32, 64, 16)",
+      "(128, 256, 64)",
+      "(512, 1024, 128)",
+      "(1024, 2048, 256)",
+      "(512, 2048, 4096)"
+    ]
+  },
+  {
+    "benchmark": {
+      "name": "Helion Benchmark",
+      "extra_info": {
+        "device": "NVIDIA H100",
+        "helion_key": "51e8afc42104bbcb61bbab34f6fc7d57e7dcbccbda2c2f8ad4656b62c3398b74",
+        "torch_key": "ee4565e219fd10bf9b40748e5b02586523e1e1a82574dd94fe2f252addc79080",
+        "triton_key": "903120782bee66c65dd0f35749de8448c243657a2abb753c6f2982e34512f9eb",
+        "triton_version": "3.5.1"
+      }
+    },
+    "model": {
+      "name": "bf16_gemm_gelu"
+    },
+    "metric": {
+      "name": "helion_tflops",
+      "benchmark_values": [
+        0.014881119143473034,
+        0.8119754389534292,
+        18.770285456828358,
+        95.71336884805547,
+        375.8925121793715
+      ]
+    },
+    "shape": [
+      "(32, 64, 16)",
+      "(128, 256, 64)",
+      "(512, 1024, 128)",
+      "(1024, 2048, 256)",
+      "(512, 2048, 4096)"
+    ]
+  }
+]
