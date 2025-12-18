@@ -1,0 +1,578 @@
+[
+  {
+    "benchmark": {
+      "name": "Helion Benchmark",
+      "extra_info": {
+        "device": "NVIDIA GeForce RTX 5090",
+        "helion_key": "c2afb808ce2f99cf08c8570bebfa7cb9cda7a7db490f368d405cfa6cea0b5432",
+        "torch_key": "ca03c5e1775f8e9af61ec97d1f7a4f848785efad56f68047b8e43cd49ad21fa5",
+        "triton_key": "903120782bee66c65dd0f35749de8448c243657a2abb753c6f2982e34512f9eb",
+        "triton_version": "3.5.1"
+      }
+    },
+    "model": {
+      "name": "bf16_gemm_gelu"
+    },
+    "metric": {
+      "name": "mako_accuracy",
+      "benchmark_values": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "shape": [
+      "(32, 64, 16)",
+      "(128, 256, 64)",
+      "(512, 1024, 128)",
+      "(1024, 2048, 256)",
+      "(512, 2048, 4096)"
+    ]
+  },
+  {
+    "benchmark": {
+      "name": "Helion Benchmark",
+      "extra_info": {
+        "device": "NVIDIA GeForce RTX 5090",
+        "helion_key": "c2afb808ce2f99cf08c8570bebfa7cb9cda7a7db490f368d405cfa6cea0b5432",
+        "torch_key": "ca03c5e1775f8e9af61ec97d1f7a4f848785efad56f68047b8e43cd49ad21fa5",
+        "triton_key": "903120782bee66c65dd0f35749de8448c243657a2abb753c6f2982e34512f9eb",
+        "triton_version": "3.5.1"
+      }
+    },
+    "model": {
+      "name": "bf16_gemm_gelu"
+    },
+    "metric": {
+      "name": "mako_speedup",
+      "benchmark_values": [
+        0.9704796944935444,
+        1.0,
+        0.9979715871067559,
+        1.0,
+        1.0
+      ]
+    },
+    "shape": [
+      "(32, 64, 16)",
+      "(128, 256, 64)",
+      "(512, 1024, 128)",
+      "(1024, 2048, 256)",
+      "(512, 2048, 4096)"
+    ]
+  },
+  {
+    "benchmark": {
+      "name": "Helion Benchmark",
+      "extra_info": {
+        "device": "NVIDIA GeForce RTX 5090",
+        "helion_key": "c2afb808ce2f99cf08c8570bebfa7cb9cda7a7db490f368d405cfa6cea0b5432",
+        "torch_key": "ca03c5e1775f8e9af61ec97d1f7a4f848785efad56f68047b8e43cd49ad21fa5",
+        "triton_key": "903120782bee66c65dd0f35749de8448c243657a2abb753c6f2982e34512f9eb",
+        "triton_version": "3.5.1"
+      }
+    },
+    "model": {
+      "name": "bf16_gemm_gelu"
+    },
+    "metric": {
+      "name": "mako_tflops",
+      "benchmark_values": [
+        0.00785239860639947,
+        0.4136000104484151,
+        8.528486319709526,
+        47.720726900008835,
+        135.4652921549803
+      ]
+    },
+    "shape": [
+      "(32, 64, 16)",
+      "(128, 256, 64)",
+      "(512, 1024, 128)",
+      "(1024, 2048, 256)",
+      "(512, 2048, 4096)"
+    ]
+  },
+  {
+    "benchmark": {
+      "name": "Helion Benchmark",
+      "extra_info": {
+        "device": "NVIDIA GeForce RTX 5090",
+        "helion_key": "c2afb808ce2f99cf08c8570bebfa7cb9cda7a7db490f368d405cfa6cea0b5432",
+        "torch_key": "ca03c5e1775f8e9af61ec97d1f7a4f848785efad56f68047b8e43cd49ad21fa5",
+        "triton_key": "903120782bee66c65dd0f35749de8448c243657a2abb753c6f2982e34512f9eb",
+        "triton_version": "3.5.1"
+      }
+    },
+    "model": {
+      "name": "bf16_gemm_gelu"
+    },
+    "metric": {
+      "name": "kernelllm_accuracy",
+      "benchmark_values": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "shape": [
+      "(32, 64, 16)",
+      "(128, 256, 64)",
+      "(512, 1024, 128)",
+      "(1024, 2048, 256)",
+      "(512, 2048, 4096)"
+    ]
+  },
+  {
+    "benchmark": {
+      "name": "Helion Benchmark",
+      "extra_info": {
+        "device": "NVIDIA GeForce RTX 5090",
+        "helion_key": "c2afb808ce2f99cf08c8570bebfa7cb9cda7a7db490f368d405cfa6cea0b5432",
+        "torch_key": "ca03c5e1775f8e9af61ec97d1f7a4f848785efad56f68047b8e43cd49ad21fa5",
+        "triton_key": "903120782bee66c65dd0f35749de8448c243657a2abb753c6f2982e34512f9eb",
+        "triton_version": "3.5.1"
+      }
+    },
+    "model": {
+      "name": "bf16_gemm_gelu"
+    },
+    "metric": {
+      "name": "kernelllm_speedup",
+      "benchmark_values": [
+        1.341836750224608,
+        1.2499999715782906,
+        1.3553719617865903,
+        1.1733332867672068,
+        1.1071428269810435
+      ]
+    },
+    "shape": [
+      "(32, 64, 16)",
+      "(128, 256, 64)",
+      "(512, 1024, 128)",
+      "(1024, 2048, 256)",
+      "(512, 2048, 4096)"
+    ]
+  },
+  {
+    "benchmark": {
+      "name": "Helion Benchmark",
+      "extra_info": {
+        "device": "NVIDIA GeForce RTX 5090",
+        "helion_key": "c2afb808ce2f99cf08c8570bebfa7cb9cda7a7db490f368d405cfa6cea0b5432",
+        "torch_key": "ca03c5e1775f8e9af61ec97d1f7a4f848785efad56f68047b8e43cd49ad21fa5",
+        "triton_key": "903120782bee66c65dd0f35749de8448c243657a2abb753c6f2982e34512f9eb",
+        "triton_version": "3.5.1"
+      }
+    },
+    "model": {
+      "name": "bf16_gemm_gelu"
+    },
+    "metric": {
+      "name": "kernelllm_tflops",
+      "benchmark_values": [
+        0.010857143212025645,
+        0.5170000013052996,
+        11.582765865836489,
+        55.99231734050763,
+        149.97942651427783
+      ]
+    },
+    "shape": [
+      "(32, 64, 16)",
+      "(128, 256, 64)",
+      "(512, 1024, 128)",
+      "(1024, 2048, 256)",
+      "(512, 2048, 4096)"
+    ]
+  },
+  {
+    "benchmark": {
+      "name": "Helion Benchmark",
+      "extra_info": {
+        "device": "NVIDIA GeForce RTX 5090",
+        "helion_key": "c2afb808ce2f99cf08c8570bebfa7cb9cda7a7db490f368d405cfa6cea0b5432",
+        "torch_key": "ca03c5e1775f8e9af61ec97d1f7a4f848785efad56f68047b8e43cd49ad21fa5",
+        "triton_key": "903120782bee66c65dd0f35749de8448c243657a2abb753c6f2982e34512f9eb",
+        "triton_version": "3.5.1"
+      }
+    },
+    "model": {
+      "name": "bf16_gemm_gelu"
+    },
+    "metric": {
+      "name": "torch_compile_accuracy",
+      "benchmark_values": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "shape": [
+      "(32, 64, 16)",
+      "(128, 256, 64)",
+      "(512, 1024, 128)",
+      "(1024, 2048, 256)",
+      "(512, 2048, 4096)"
+    ]
+  },
+  {
+    "benchmark": {
+      "name": "Helion Benchmark",
+      "extra_info": {
+        "device": "NVIDIA GeForce RTX 5090",
+        "helion_key": "c2afb808ce2f99cf08c8570bebfa7cb9cda7a7db490f368d405cfa6cea0b5432",
+        "torch_key": "ca03c5e1775f8e9af61ec97d1f7a4f848785efad56f68047b8e43cd49ad21fa5",
+        "triton_key": "903120782bee66c65dd0f35749de8448c243657a2abb753c6f2982e34512f9eb",
+        "triton_version": "3.5.1"
+      }
+    },
+    "model": {
+      "name": "bf16_gemm_gelu"
+    },
+    "metric": {
+      "name": "torch_compile_speedup",
+      "benchmark_values": [
+        2.3070174503628116,
+        1.8604650690581441,
+        1.6131148542136622,
+        1.100000036379789,
+        1.1575262301241556
+      ]
+    },
+    "shape": [
+      "(32, 64, 16)",
+      "(128, 256, 64)",
+      "(512, 1024, 128)",
+      "(1024, 2048, 256)",
+      "(512, 2048, 4096)"
+    ]
+  },
+  {
+    "benchmark": {
+      "name": "Helion Benchmark",
+      "extra_info": {
+        "device": "NVIDIA GeForce RTX 5090",
+        "helion_key": "c2afb808ce2f99cf08c8570bebfa7cb9cda7a7db490f368d405cfa6cea0b5432",
+        "torch_key": "ca03c5e1775f8e9af61ec97d1f7a4f848785efad56f68047b8e43cd49ad21fa5",
+        "triton_key": "903120782bee66c65dd0f35749de8448c243657a2abb753c6f2982e34512f9eb",
+        "triton_version": "3.5.1"
+      }
+    },
+    "model": {
+      "name": "bf16_gemm_gelu"
+    },
+    "metric": {
+      "name": "torch_compile_tflops",
+      "benchmark_values": [
+        0.018666666304256927,
+        0.7694883720013598,
+        13.785390429967997,
+        52.4928013260797,
+        156.80462894082166
+      ]
+    },
+    "shape": [
+      "(32, 64, 16)",
+      "(128, 256, 64)",
+      "(512, 1024, 128)",
+      "(1024, 2048, 256)",
+      "(512, 2048, 4096)"
+    ]
+  },
+  {
+    "benchmark": {
+      "name": "Helion Benchmark",
+      "extra_info": {
+        "device": "NVIDIA GeForce RTX 5090",
+        "helion_key": "c2afb808ce2f99cf08c8570bebfa7cb9cda7a7db490f368d405cfa6cea0b5432",
+        "torch_key": "ca03c5e1775f8e9af61ec97d1f7a4f848785efad56f68047b8e43cd49ad21fa5",
+        "triton_key": "903120782bee66c65dd0f35749de8448c243657a2abb753c6f2982e34512f9eb",
+        "triton_version": "3.5.1"
+      }
+    },
+    "model": {
+      "name": "bf16_gemm_gelu"
+    },
+    "metric": {
+      "name": "torch_compile_default_accuracy",
+      "benchmark_values": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "shape": [
+      "(32, 64, 16)",
+      "(128, 256, 64)",
+      "(512, 1024, 128)",
+      "(1024, 2048, 256)",
+      "(512, 2048, 4096)"
+    ]
+  },
+  {
+    "benchmark": {
+      "name": "Helion Benchmark",
+      "extra_info": {
+        "device": "NVIDIA GeForce RTX 5090",
+        "helion_key": "c2afb808ce2f99cf08c8570bebfa7cb9cda7a7db490f368d405cfa6cea0b5432",
+        "torch_key": "ca03c5e1775f8e9af61ec97d1f7a4f848785efad56f68047b8e43cd49ad21fa5",
+        "triton_key": "903120782bee66c65dd0f35749de8448c243657a2abb753c6f2982e34512f9eb",
+        "triton_version": "3.5.1"
+      }
+    },
+    "model": {
+      "name": "bf16_gemm_gelu"
+    },
+    "metric": {
+      "name": "torch_compile_default_speedup",
+      "benchmark_values": [
+        1.3769633276497057,
+        1.2499999715782906,
+        1.3442623785113852,
+        1.179229478777214,
+        1.1077610018815602
+      ]
+    },
+    "shape": [
+      "(32, 64, 16)",
+      "(128, 256, 64)",
+      "(512, 1024, 128)",
+      "(1024, 2048, 256)",
+      "(512, 2048, 4096)"
+    ]
+  },
+  {
+    "benchmark": {
+      "name": "Helion Benchmark",
+      "extra_info": {
+        "device": "NVIDIA GeForce RTX 5090",
+        "helion_key": "c2afb808ce2f99cf08c8570bebfa7cb9cda7a7db490f368d405cfa6cea0b5432",
+        "torch_key": "ca03c5e1775f8e9af61ec97d1f7a4f848785efad56f68047b8e43cd49ad21fa5",
+        "triton_key": "903120782bee66c65dd0f35749de8448c243657a2abb753c6f2982e34512f9eb",
+        "triton_version": "3.5.1"
+      }
+    },
+    "model": {
+      "name": "bf16_gemm_gelu"
+    },
+    "metric": {
+      "name": "torch_compile_default_tflops",
+      "benchmark_values": [
+        0.011141361304568389,
+        0.5170000013052996,
+        11.487825358306662,
+        56.2736879091672,
+        150.06316775777918
+      ]
+    },
+    "shape": [
+      "(32, 64, 16)",
+      "(128, 256, 64)",
+      "(512, 1024, 128)",
+      "(1024, 2048, 256)",
+      "(512, 2048, 4096)"
+    ]
+  },
+  {
+    "benchmark": {
+      "name": "Helion Benchmark",
+      "extra_info": {
+        "device": "NVIDIA GeForce RTX 5090",
+        "helion_key": "c2afb808ce2f99cf08c8570bebfa7cb9cda7a7db490f368d405cfa6cea0b5432",
+        "torch_key": "ca03c5e1775f8e9af61ec97d1f7a4f848785efad56f68047b8e43cd49ad21fa5",
+        "triton_key": "903120782bee66c65dd0f35749de8448c243657a2abb753c6f2982e34512f9eb",
+        "triton_version": "3.5.1"
+      }
+    },
+    "model": {
+      "name": "bf16_gemm_gelu"
+    },
+    "metric": {
+      "name": "triton_accuracy",
+      "benchmark_values": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "shape": [
+      "(32, 64, 16)",
+      "(128, 256, 64)",
+      "(512, 1024, 128)",
+      "(1024, 2048, 256)",
+      "(512, 2048, 4096)"
+    ]
+  },
+  {
+    "benchmark": {
+      "name": "Helion Benchmark",
+      "extra_info": {
+        "device": "NVIDIA GeForce RTX 5090",
+        "helion_key": "c2afb808ce2f99cf08c8570bebfa7cb9cda7a7db490f368d405cfa6cea0b5432",
+        "torch_key": "ca03c5e1775f8e9af61ec97d1f7a4f848785efad56f68047b8e43cd49ad21fa5",
+        "triton_key": "903120782bee66c65dd0f35749de8448c243657a2abb753c6f2982e34512f9eb",
+        "triton_version": "3.5.1"
+      }
+    },
+    "model": {
+      "name": "bf16_gemm_gelu"
+    },
+    "metric": {
+      "name": "triton_speedup",
+      "benchmark_values": [
+        1.3697915892964605,
+        1.8079096156674639,
+        1.3333334384962294,
+        1.1264000339746483,
+        1.1247165098898575
+      ]
+    },
+    "shape": [
+      "(32, 64, 16)",
+      "(128, 256, 64)",
+      "(512, 1024, 128)",
+      "(1024, 2048, 256)",
+      "(512, 2048, 4096)"
+    ]
+  },
+  {
+    "benchmark": {
+      "name": "Helion Benchmark",
+      "extra_info": {
+        "device": "NVIDIA GeForce RTX 5090",
+        "helion_key": "c2afb808ce2f99cf08c8570bebfa7cb9cda7a7db490f368d405cfa6cea0b5432",
+        "torch_key": "ca03c5e1775f8e9af61ec97d1f7a4f848785efad56f68047b8e43cd49ad21fa5",
+        "triton_key": "903120782bee66c65dd0f35749de8448c243657a2abb753c6f2982e34512f9eb",
+        "triton_version": "3.5.1"
+      }
+    },
+    "model": {
+      "name": "bf16_gemm_gelu"
+    },
+    "metric": {
+      "name": "triton_tflops",
+      "benchmark_values": [
+        0.011083332941306367,
+        0.7477514359298532,
+        11.394428595701024,
+        53.752628401464875,
+        152.3600506037593
+      ]
+    },
+    "shape": [
+      "(32, 64, 16)",
+      "(128, 256, 64)",
+      "(512, 1024, 128)",
+      "(1024, 2048, 256)",
+      "(512, 2048, 4096)"
+    ]
+  },
+  {
+    "benchmark": {
+      "name": "Helion Benchmark",
+      "extra_info": {
+        "device": "NVIDIA GeForce RTX 5090",
+        "helion_key": "c2afb808ce2f99cf08c8570bebfa7cb9cda7a7db490f368d405cfa6cea0b5432",
+        "torch_key": "ca03c5e1775f8e9af61ec97d1f7a4f848785efad56f68047b8e43cd49ad21fa5",
+        "triton_key": "903120782bee66c65dd0f35749de8448c243657a2abb753c6f2982e34512f9eb",
+        "triton_version": "3.5.1"
+      }
+    },
+    "model": {
+      "name": "bf16_gemm_gelu"
+    },
+    "metric": {
+      "name": "helion_accuracy",
+      "benchmark_values": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ]
+    },
+    "shape": [
+      "(32, 64, 16)",
+      "(128, 256, 64)",
+      "(512, 1024, 128)",
+      "(1024, 2048, 256)",
+      "(512, 2048, 4096)"
+    ]
+  },
+  {
+    "benchmark": {
+      "name": "Helion Benchmark",
+      "extra_info": {
+        "device": "NVIDIA GeForce RTX 5090",
+        "helion_key": "c2afb808ce2f99cf08c8570bebfa7cb9cda7a7db490f368d405cfa6cea0b5432",
+        "torch_key": "ca03c5e1775f8e9af61ec97d1f7a4f848785efad56f68047b8e43cd49ad21fa5",
+        "triton_key": "903120782bee66c65dd0f35749de8448c243657a2abb753c6f2982e34512f9eb",
+        "triton_version": "3.5.1"
+      }
+    },
+    "model": {
+      "name": "bf16_gemm_gelu"
+    },
+    "metric": {
+      "name": "helion_speedup",
+      "benchmark_values": [
+        1.308457667139785,
+        0.91690539729271,
+        0.4327176802614911,
+        0.3176895174101837,
+        0.19999999530583384
+      ]
+    },
+    "shape": [
+      "(32, 64, 16)",
+      "(128, 256, 64)",
+      "(512, 1024, 128)",
+      "(1024, 2048, 256)",
+      "(512, 2048, 4096)"
+    ]
+  },
+  {
+    "benchmark": {
+      "name": "Helion Benchmark",
+      "extra_info": {
+        "device": "NVIDIA GeForce RTX 5090",
+        "helion_key": "c2afb808ce2f99cf08c8570bebfa7cb9cda7a7db490f368d405cfa6cea0b5432",
+        "torch_key": "ca03c5e1775f8e9af61ec97d1f7a4f848785efad56f68047b8e43cd49ad21fa5",
+        "triton_key": "903120782bee66c65dd0f35749de8448c243657a2abb753c6f2982e34512f9eb",
+        "triton_version": "3.5.1"
+      }
+    },
+    "model": {
+      "name": "bf16_gemm_gelu"
+    },
+    "metric": {
+      "name": "helion_tflops",
+      "benchmark_values": [
+        0.010587064541667744,
+        0.37923208190047303,
+        3.697927740714117,
+        15.160374699326981,
+        27.093057795099465
+      ]
+    },
+    "shape": [
+      "(32, 64, 16)",
+      "(128, 256, 64)",
+      "(512, 1024, 128)",
+      "(1024, 2048, 256)",
+      "(512, 2048, 4096)"
+    ]
+  }
+]
