@@ -12,7 +12,7 @@ KernelGeneration is a repository created to evaluate GPU kernel metrics, includi
     ```
   - ROCm example:
     ```bash
-    pip install --pre torch torchvision --index-url https://download.pytorch.org/whl/nightly/rocm6.4
+    pip3 install --pre torch torchvision --index-url https://download.pytorch.org/whl/nightly/rocm7.1
     ```
   Use the official PyTorch install selector to pick the correct nightly wheel for your OS/driver stack.
 
@@ -46,15 +46,15 @@ kernelGen/
 
 ### Evaluated Kernels
 - `MatMul`
-- `LayerNorm` — **WIP** (optional KernelLLM prompts available in `./prompt/`)
-- **WIP**: `GELU`
+- `LayerNorm`
+- `GELU`
 
 ### Backends Tested
 - TorchInductor
 - Triton
 - Helion
 - [KernelLLM](https://huggingface.co/facebook/KernelLLM) *(optional, prompts only via `./prompt/`)*
-- **WIP**: Mako (based on KernelLLM)
+- [Makora](https://makora.com/).
 
 ### Tested on
 - [TritonBench](https://github.com/meta-pytorch/tritonbench/tree/main)
